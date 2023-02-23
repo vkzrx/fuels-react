@@ -1,0 +1,49 @@
+{
+  "name": "root",
+  "description": "React library for the Fuel blockchain",
+  "version": "0.0.0",
+  "author": {
+    "name": "0xYami",
+    "email": "0xYami@proton.me"
+  },
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/0xYami/fuels-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xYami/fuels-react.git"
+  },
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "eslint . --cache",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "ci": "pnpm lint && pnpm format:check && pnpm build",
+    "clean": "pnpm -rc --parallel exec 'rm -rf build dist node_modules'",
+    "clean:dist": "pnpm -rc --parallel exec 'rm -rf dist'",
+    "example": "pnpm --filter '@examples/vite'"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@types/prettier": "^2.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-define-config": "^1.15.0",
+    "prettier": "^2.8.4",
+    "turbo": "^1.8.0",
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "packageManager": "pnpm@7.25.0"
+}

@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.eslintcache
+.pnpm-debug.log*
+.turbo
+.vscode
+cache
+coverage
+dist
+build
+node_modules
