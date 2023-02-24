@@ -12,6 +12,9 @@
     "type": "git",
     "url": "https://github.com/0xYami/fuels-react.git"
   },
+  "bugs": {
+    "url": "https://github.com/0xYami/fuels-react/issues"
+  },
   "type": "module",
   "main": "src/index.ts",
   "module": "dist/index.js",
@@ -35,14 +38,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./package.json": "./package.json"
-  },
   "keywords": [
     "fuel",
     "react",
