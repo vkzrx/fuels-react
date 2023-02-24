@@ -29,6 +29,7 @@ class Client {
     // `chains` is a `NonEmptyArray`
     const currentChain = chains[0];
 
+    providerStore.fuel = window.fuel || null;
     providerStore.defaultProvider = new Provider(currentChain.url);
     providerStore.chains = chains;
     providerStore.currentChain = currentChain;
@@ -38,6 +39,7 @@ class Client {
     if (IS_BROWSER) {
       // add `fuel` to store once injected
       document.addEventListener('FuelLoaded', () => {
+        if (providerStore.fuel) return;
         if (!window.fuel) return;
         providerStore.fuel = window.fuel;
       });

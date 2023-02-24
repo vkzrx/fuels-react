@@ -49,6 +49,15 @@
     "tsup": "^6.6.3",
     "typescript": "^4.9.5"
   },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "typescript": ">=4.9.4"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
   "keywords": [
     "fuel",
     "react",
