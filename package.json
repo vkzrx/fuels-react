@@ -26,7 +26,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "ci": "pnpm lint && pnpm format:check && pnpm build",
-    "clean": "pnpm -rc --parallel exec 'rm -rf build dist node_modules'",
+    "clean": "pnpm -rc --parallel exec 'rm -rf .turbo build dist node_modules'",
     "clean:dist": "pnpm -rc --parallel exec 'rm -rf dist'",
     "example": "pnpm --filter '@examples/vite'"
   },

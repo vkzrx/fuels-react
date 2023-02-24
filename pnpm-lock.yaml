@@ -67,14 +67,18 @@ importers:
       '@tanstack/react-query': ^4.24.9
       '@types/node': ^18.13.0
       '@types/react': ^18.0.28
+      dexie: ^3.2.3
+      dexie-observable: 4.0.1-beta.13
       fuels: ^0.31.0
       react: ^18.2.0
       tsup: ^6.6.3
       typescript: ^4.9.5
       valtio: ^1.10.2
     dependencies:
-      '@fuel-wallet/sdk': 0.6.0_fuels@0.31.0
+      '@fuel-wallet/sdk': 0.6.0_dexie@3.2.3+fuels@0.31.0
       '@tanstack/react-query': 4.24.9_react@18.2.0
+      dexie: 3.2.3
+      dexie-observable: 4.0.1-beta.13_dexie@3.2.3
       fuels: 0.31.0
       react: 18.2.0
       valtio: 1.10.2_react@18.2.0
@@ -1232,13 +1236,13 @@ packages:
     resolution: {integrity: sha512-GuTTGmdbBFez7Sr5aza08SvFfjYqh6qf6mk7U/KX0CB8tJncciDdtUeqZLN7Zs63zqIAm0E3MmXf1gT/fs1y3w==}
     dev: false
 
-  /@fuel-wallet/sdk/0.6.0_fuels@0.31.0:
+  /@fuel-wallet/sdk/0.6.0_dexie@3.2.3+fuels@0.31.0:
     resolution: {integrity: sha512-VFx38hhuMZbRdUzKA33cnhjuZrUbTkrp0y51KlZ3h1noN79Vq3JY+1hwkqLPvYgtlO4ZKBz2ZDaH6CtIy99m+Q==}
     peerDependencies:
       fuels: '>=0.30.0'
     dependencies:
       '@types/chrome': 0.0.212
-      dexie-observable: 4.0.1-beta.13
+      dexie-observable: 4.0.1-beta.13_dexie@3.2.3
       events: 3.3.0
       fuels: 0.31.0
       json-rpc-2.0: 1.5.1
@@ -2321,10 +2325,17 @@ packages:
       minimist: 1.2.8
     dev: true
 
-  /dexie-observable/4.0.1-beta.13:
+  /dexie-observable/4.0.1-beta.13_dexie@3.2.3:
     resolution: {integrity: sha512-axmgPk7yjoPwj+0DdQIE5s1MBXi+6XcIFIjBKdQAmSGpsLQSth/LHvMOQ3q3Wj6pwIE5hqIxg2GL75sVqQbhEw==}
     peerDependencies:
       dexie: ^3.0.2 || ^4.0.1-alpha.5
+    dependencies:
+      dexie: 3.2.3
+    dev: false
+
+  /dexie/3.2.3:
+    resolution: {integrity: sha512-iHayBd4UYryDCVUNa3PMsJMEnd8yjyh5p7a+RFeC8i8n476BC9wMhVvqiImq5zJZJf5Tuer+s4SSj+AA3x+ZbQ==}
+    engines: {node: '>=6.0'}
     dev: false
 
   /didyoumean/1.2.2:
