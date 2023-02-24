@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.1.4
+
+### Patch Changes
+
+- beb2c3e: Attempt to fix module resolution
+
 ## 0.1.3
 
 ### Patch Changes
