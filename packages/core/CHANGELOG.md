@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.1.6
+
+### Patch Changes
+
+- 779ad05: Fix `Fuel` loading and add `peerDependencies`
+
 ## 0.1.5
 
 ### Patch Changes
