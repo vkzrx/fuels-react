@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.1.2
+
+### Patch Changes
+
+- 185c719: Attempt to fix `build` module resolution
+
 ## 0.1.1
 
 ### Patch Changes
