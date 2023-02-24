@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.1.3
+
+### Patch Changes
+
+- 1a25628: Another attempt to fix module resolution
+
 ## 0.1.2
 
 ### Patch Changes
