@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.1.5
+
+### Patch Changes
+
+- fefc5d2: Another attempt to fix module resolution...
+
 ## 0.1.4
 
 ### Patch Changes
