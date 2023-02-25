@@ -1,5 +1,12 @@
 # @examples/vite
 
+## 0.0.8
+
+### Patch Changes
+
+- Updated dependencies [cfd287b]
+  - fuels-react@0.1.7
+
 ## 0.0.7
 
 ### Patch Changes

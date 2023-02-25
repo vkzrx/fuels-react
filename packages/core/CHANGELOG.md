@@ -1,5 +1,14 @@
 # fuels-react
 
+## 0.1.7
+
+### Patch Changes
+
+- cfd287b: Unify `queries` and `mutations`
+
+  - Move out `transfer` from `useWallet` to `useTransfer`
+  - Move out `signMessage` from `useWallet` to `useSignMessage`
+
 ## 0.1.6
 
 ### Patch Changes
