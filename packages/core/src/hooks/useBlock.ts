@@ -1,18 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import type { Block } from 'fuels';
 import { useSnapshot } from 'valtio';
 import { BlockNotFound, ProviderNotDefined } from '../errors';
 import { providerStore } from '../stores';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
-export type UseBlockConfig<T = Block> = Pick<UseQueryOptions<T>, 'onSuccess' | 'onError'> & {
+export type UseBlockConfig<T = Block> = BaseUseQueryConfig<T> & {
   idOrHeight: string | number | null;
 };
 
-export type UseBlockResult<T = Block> = Pick<
-  UseQueryResult<T>,
-  'data' | 'error' | 'status' | 'isError' | 'isFetching' | 'isLoading' | 'isSuccess'
->;
+export type UseBlockResult<T = Block> = BaseUseQueryResult<T>;
 
 function useBlock(config: UseBlockConfig): UseBlockResult {
   const { defaultProvider } = useSnapshot(providerStore);

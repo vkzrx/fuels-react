@@ -31,7 +31,9 @@ function useContractRead<T extends Contract>(config: UseContractReadConfig<T>): 
     };
 
     const unsubscribe = subscribe(providerStore, callback);
+
     callback();
+
     return unsubscribe;
   }, []);
 
