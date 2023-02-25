@@ -14,7 +14,7 @@ const userStatusToColor: Record<UserStatus, string> = {
 
 function WalletSection() {
   const wallet = useWallet();
-  const balance = useBalance({ owner: wallet.address });
+  const balance = useBalance({ address: wallet.address });
 
   const data = useMemo<CardProps['data']>(() => {
     return [

@@ -1,35 +1,36 @@
 import { useQuery } from '@tanstack/react-query';
-import type { UseQueryOptions } from '@tanstack/react-query';
 import { Address } from 'fuels';
 import type { CoinQuantity, CursorPaginationArgs } from 'fuels';
 import { useSnapshot } from 'valtio';
 import { providerStore } from '../stores';
 import { AddressNotCorrect, ProviderNotDefined } from '../errors';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
-type UseBalancesConfig = Pick<UseQueryOptions<CoinQuantity[]>, 'onSuccess' | 'onError'> & {
-  owner: string | null;
+type UseBalancesConfig = BaseUseQueryConfig<CoinQuantity[]> & {
+  address: string | null;
   pagination?: CursorPaginationArgs;
 };
 
-function useBalances(config: UseBalancesConfig) {
+function useBalances(config: UseBalancesConfig): BaseUseQueryResult<CoinQuantity[]> {
   const { defaultProvider } = useSnapshot(providerStore);
 
-  const { data, error, isError, isFetching, isLoading, isSuccess } = useQuery({
+  const { data, status, error, isError, isFetching, isLoading, isSuccess } = useQuery({
     queryKey: ['balances'],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
-      if (!config.owner) throw AddressNotCorrect;
-      const address = Address.fromString(config.owner);
-      const balance = await defaultProvider.getBalances(address, config.pagination);
-      return balance.toString();
+      if (!config.address) throw AddressNotCorrect;
+      const address = Address.fromString(config.address);
+      const balances = await defaultProvider.getBalances(address, config.pagination);
+      return balances.toString();
     },
     onSuccess: config.onSuccess,
     onError: config.onError,
-    enabled: !!config.owner,
+    enabled: !!config.address,
   });
 
   return {
     data,
+    status,
     error,
     isError,
     isFetching,

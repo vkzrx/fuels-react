@@ -1,37 +1,44 @@
 import { useQuery } from '@tanstack/react-query';
-import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import type { Provider } from 'fuels';
 import { useSnapshot } from 'valtio';
 import { providerStore } from '../stores';
 import { ProviderNotDefined, TransactionIDNotCorrect, TransactionNotFound } from '../errors';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
-type TransactionResponseData = Exclude<Awaited<ReturnType<Provider['getTransaction']>>, null>;
+type TransactionResponseData = NonNullable<Awaited<ReturnType<Provider['getTransaction']>>>;
 
-type UseTransactionConfig = Pick<
-  UseQueryOptions<TransactionResponseData>,
-  'onSuccess' | 'onError'
-> & {
+type UseTransactionConfig = BaseUseQueryConfig<TransactionResponseData> & {
   transactionId: string | null;
 };
 
-function useTransaction(config: UseTransactionConfig): UseQueryResult<TransactionResponseData> {
+type UseTransactionResult = BaseUseQueryResult<TransactionResponseData>;
+
+function useTransaction(config: UseTransactionConfig): UseTransactionResult {
   const { defaultProvider } = useSnapshot(providerStore);
 
-  const result = useQuery({
+  const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ['transaction', config.transactionId],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       if (!config.transactionId) throw TransactionIDNotCorrect;
-      const result = await defaultProvider.getTransaction(config.transactionId);
-      if (!result) throw TransactionNotFound;
-      return result;
+      const transaction = await defaultProvider.getTransaction(config.transactionId);
+      if (!transaction) throw TransactionNotFound;
+      return transaction;
     },
     onSuccess: config.onSuccess,
     onError: config.onError,
     enabled: !!config.transactionId,
   });
 
-  return result;
+  return {
+    data,
+    status,
+    error,
+    isError,
+    isLoading,
+    isFetching,
+    isSuccess,
+  };
 }
 
 export default useTransaction;

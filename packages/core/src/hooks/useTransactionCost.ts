@@ -1,44 +1,45 @@
 import { useQuery } from '@tanstack/react-query';
-import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import type { Provider, TransactionRequestLike } from 'fuels';
 import { useSnapshot } from 'valtio';
 import { providerStore } from '../stores';
-import { ProviderNotDefined, TransactionNotFound } from '../errors';
+import { ProviderNotDefined } from '../errors';
+import { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
-type TransactionCostResponseData = Exclude<
-  Awaited<ReturnType<Provider['getTransactionCost']>>,
-  null
->;
+type TransactionCostResponse = Awaited<ReturnType<Provider['getTransactionCost']>>;
 
-type UseTransactionCostConfig = Pick<
-  UseQueryOptions<TransactionCostResponseData>,
-  'onSuccess' | 'onError'
-> & {
+type UseTransactionCostConfig = BaseUseQueryConfig<TransactionCostResponse> & {
   transactionRequest: TransactionRequestLike;
   tolerance?: number;
 };
 
 function useTransactionCost(
   config: UseTransactionCostConfig,
-): UseQueryResult<TransactionCostResponseData> {
+): BaseUseQueryResult<TransactionCostResponse> {
   const { defaultProvider } = useSnapshot(providerStore);
 
-  const result = useQuery({
+  const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ['transactionCost'],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
-      const result = await defaultProvider.getTransactionCost(
+      const transactionCost = await defaultProvider.getTransactionCost(
         config.transactionRequest,
         config.tolerance,
       );
-      if (!result) throw TransactionNotFound;
-      return result;
+      return transactionCost;
     },
     onSuccess: config.onSuccess,
     onError: config.onError,
   });
 
-  return result;
+  return {
+    data,
+    status,
+    error,
+    isError,
+    isLoading,
+    isFetching,
+    isSuccess,
+  };
 }
 
 export default useTransactionCost;

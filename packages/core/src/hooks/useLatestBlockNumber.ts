@@ -1,20 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import type { QueryKey, UseQueryResult } from '@tanstack/react-query';
-import type { UseQueryOptions } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import { ProviderNotDefined } from '../errors';
 import { providerStore } from '../stores';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
-type UseLatestBlockNumberOptions = Pick<
-  UseQueryOptions<string>,
-  'onError' | 'onSettled' | 'onSuccess' | 'refetchInterval' | 'onSettled'
->;
+type UseLatestBlockNumberConfig = BaseUseQueryConfig<string> & {
+  refetchInterval?: number | false;
+};
 
-function useLatestBlockNumber(options?: UseLatestBlockNumberOptions): UseQueryResult<string> {
+function useLatestBlockNumber(options?: UseLatestBlockNumberConfig): BaseUseQueryResult<string> {
   const { defaultProvider } = useSnapshot(providerStore);
 
-  const result = useQuery({
-    queryKey: ['latestBlockNumber'] as QueryKey,
+  const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
+    queryKey: ['latestBlockNumber'],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       const blockNumber = await defaultProvider.getBlockNumber();
@@ -25,7 +23,15 @@ function useLatestBlockNumber(options?: UseLatestBlockNumberOptions): UseQueryRe
     refetchInterval: options?.refetchInterval,
   });
 
-  return result;
+  return {
+    data,
+    status,
+    error,
+    isError,
+    isLoading,
+    isFetching,
+    isSuccess,
+  };
 }
 
 export default useLatestBlockNumber;
