@@ -2,15 +2,23 @@ import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import { disconnect as disconnect_, userStore } from '../stores';
+import type { UserStatus } from '../stores';
+import type { BaseUseMutationResult } from '../types';
 
-function useDisconnect() {
+type UseDisconnectResult = Omit<BaseUseMutationResult, 'data' | 'status'> & {
+  isConnected: boolean;
+  status: UserStatus;
+  disconnect: () => void;
+  disconnectAsync: () => Promise<void>;
+};
+
+function useDisconnect(): UseDisconnectResult {
   const store = useSnapshot(userStore);
 
-  const { data, error, status, mutate, mutateAsync, isError, isIdle, isLoading, isSuccess } =
-    useMutation({
-      mutationKey: ['disconnect'],
-      mutationFn: async () => disconnect_(),
-    });
+  const { mutate, mutateAsync, error, isError, isLoading, isSuccess } = useMutation({
+    mutationKey: ['disconnect'],
+    mutationFn: async () => disconnect_(),
+  });
 
   const disconnect = useCallback(() => {
     return mutate();
@@ -21,14 +29,12 @@ function useDisconnect() {
   }, [mutateAsync]);
 
   return {
-    data,
     error,
     disconnect,
     disconnectAsync,
-    status,
+    status: userStore.status,
     isConnected: store.status === 'connected',
     isError,
-    isIdle,
     isLoading,
     isSuccess,
   };

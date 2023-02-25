@@ -2,11 +2,20 @@ import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import { connect as connect_, userStore } from '../stores';
+import type { UserStatus } from '../stores';
+import type { BaseUseMutationResult } from '../types';
 
-function useConnect() {
+type UseConnectResult = Omit<BaseUseMutationResult, 'data' | 'status'> & {
+  isConnected: boolean;
+  status: UserStatus;
+  connect: () => void;
+  connectAsync: () => Promise<void>;
+};
+
+function useConnect(): UseConnectResult {
   const store = useSnapshot(userStore);
 
-  const { data, error, mutate, mutateAsync, isError, isIdle, isLoading, isSuccess } = useMutation({
+  const { mutate, mutateAsync, error, isError, isLoading, isSuccess } = useMutation({
     mutationKey: ['connect'],
     mutationFn: async () => connect_(),
   });
@@ -20,14 +29,12 @@ function useConnect() {
   }, [mutateAsync]);
 
   return {
-    data,
+    status: userStore.status,
     error,
     connect,
     connectAsync,
-    status: store.status,
     isConnected: store.status === 'connected',
     isError,
-    isIdle,
     isLoading,
     isSuccess,
   };

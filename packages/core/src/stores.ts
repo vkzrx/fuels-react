@@ -20,7 +20,7 @@ export type ProviderStore = {
 
 export type UserStatus = 'connected' | 'connecting' | 'disconnected' | 'disconnecting' | 'locked';
 
-type UserStore = {
+export type UserStore = {
   address: string | null;
   wallet: FuelWalletLocked | null;
   status: UserStatus;

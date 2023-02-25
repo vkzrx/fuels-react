@@ -38,7 +38,7 @@ function WalletSection() {
         {wallet.isConnected ? (
           <button
             type="button"
-            onClick={wallet.disconnect.mutate}
+            onClick={wallet.disconnect}
             className="p-2 border-[0.1px] border-neutral-600 rounded-lg"
           >
             Disconnect
@@ -46,7 +46,7 @@ function WalletSection() {
         ) : (
           <button
             type="button"
-            onClick={wallet.connect.mutate}
+            onClick={wallet.connect}
             className="p-2 border-[0.1px] border-neutral-600 rounded-lg"
           >
             Connect

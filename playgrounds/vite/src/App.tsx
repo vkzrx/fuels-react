@@ -19,9 +19,9 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
         {wallet.isConnected ? (
-          <button onClick={wallet.disconnect.mutate}>Disconnect</button>
+          <button onClick={wallet.disconnect}>Disconnect</button>
         ) : (
-          <button onClick={wallet.connect.mutate}>Connect</button>
+          <button onClick={wallet.connect}>Connect</button>
         )}
         <p>
           Edit <code>src/App.tsx</code>
