@@ -1,0 +1,130 @@
+# useContract
+
+Hook for creating a `Contract` instance.
+
+If you don't have it already you'll need to generate the types from your ABIs.
+
+With `pnpm`
+
+```bash
+$ pnpm dlx fuels typegen -i path/to/your/abis/*-abi.json -o output/dir
+```
+
+With `npm`
+
+```bash
+$ npx fuels typegen -i path/to/your/abis/*-abi.json -o output/dir
+```
+
+## Usage
+
+```tsx
+import { useState, useEffect } from 'react';
+import { useContract } from 'fuels-react';
+import type { CounterAbi } from './contracts/Counter';
+import counterAbi from './contracts/counterAbi.json';
+
+function App() {
+  const [counter, setCounter] = useState<number | null>(null);
+  const contract = useContract<CounterAbi>({
+    address: '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74',
+    abi: counterAbi,
+  });
+
+  useEffect(() => {
+    if (!contract) return;
+    (async () => {
+      const counter = await contract.functions.counter().get();
+      setCounter(counter);
+    })();
+  }, [contract]);
+
+  const increment = async () => {
+    if (!contract) return;
+    await contract.functions.increment().call();
+  };
+
+  const decrement = async () => {
+    if (!contract) return;
+    await contract.functions.decrement().call();
+  };
+
+  return (
+    <>
+      <div>Counter: {counter}</div>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </>
+  );
+}
+```
+
+## Configuration
+
+```ts
+type UseContractConfig = {
+  contractId: string | AbstractAddress;
+  abi: JsonAbi | Interface;
+  signerOrProvider?: BaseWalletLocked | Provider;
+};
+```
+
+### address
+
+Contract address your `Contract` instance will be connected to.
+
+```tsx {7}
+import { useContract } from 'fuels-react';
+import type { CounterAbi } from './contracts/Counter';
+import counterAbi from './contracts/counterAbi.json';
+
+function App() {
+  const contract = useContract<CounterAbi>({
+    address: '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74',
+    abi: counterAbi,
+  });
+}
+```
+
+### abi
+
+Contract abi your `Contract` instance will use to craft payloads.
+
+```tsx {8}
+import { useContract } from 'fuels-react';
+import type { CounterAbi } from './contracts/Counter';
+import counterAbi from './contracts/counterAbi.json';
+
+function App() {
+  const contract = useContract<CounterAbi>({
+    address: '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74',
+    abi: counterAbi,
+  });
+}
+```
+
+### signerOrProvider (optional)
+
+Custom signer or provider you want to use if needed. Defaults to the provider injected by the user wallet, if not injected then it fallbacks to the provider used when creating the client.
+
+```tsx {1,7,11}
+import { Provider } from 'fuels';
+import { useContract } from 'fuels-react';
+import type { CounterAbi } from './contracts/Counter';
+import counterAbi from './contracts/counterAbi.json';
+
+function App() {
+  const provider = new Provider('https://node-beta-2.fuel.network/graphql');
+  const contract = useContract<CounterAbi>({
+    address: '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74',
+    abi: counterAbi,
+    signerOrProvider: provider,
+  });
+}
+```
+
+## Return Type
+
+```ts
+type UseContractResult<T extends Contract> = T | null;
+```
