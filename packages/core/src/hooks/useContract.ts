@@ -6,13 +6,13 @@ import { ProviderNotDefined } from '../errors';
 import { providerStore, userStore } from '../stores';
 
 type UseContractConfig = {
-  contractId: string | AbstractAddress;
+  address: string | AbstractAddress;
   abi: JsonAbi | Interface;
   signerOrProvider?: BaseWalletLocked | Provider;
 };
 
 function useContract<T extends Contract>(config: UseContractConfig): T | null {
-  const { contractId, abi, signerOrProvider } = config;
+  const { address, abi, signerOrProvider } = config;
 
   const { defaultProvider } = useSnapshot(providerStore);
   const [contract, setContract] = useState<Contract | null>(null);
@@ -30,7 +30,7 @@ function useContract<T extends Contract>(config: UseContractConfig): T | null {
         walletOrProvider = userStore.wallet;
       }
 
-      const contract = new Contract(contractId, abi, walletOrProvider);
+      const contract = new Contract(address, abi, walletOrProvider);
       setContract(contract);
     };
 

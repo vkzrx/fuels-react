@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address, NativeAssetId } from 'fuels';
-import type { BytesLike } from 'fuels';
 import { useSnapshot } from 'valtio';
 import { providerStore } from '../stores';
 import { AddressNotCorrect, ProviderNotDefined } from '../errors';
@@ -8,7 +7,7 @@ import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
 type UseBalanceConfig = BaseUseQueryConfig<string> & {
   address: string | null;
-  assetId?: BytesLike;
+  assetId?: string;
 };
 
 function useBalance(config: UseBalanceConfig): BaseUseQueryResult<string> {

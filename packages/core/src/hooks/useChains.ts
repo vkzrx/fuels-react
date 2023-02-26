@@ -2,12 +2,12 @@ import { useSnapshot } from 'valtio';
 import { providerStore } from '../stores';
 import type { Chain } from '../stores';
 
-type UseChainResult = {
+type UseChainsResult = {
   currentChain: Chain | null;
   chains: Chain[] | null;
 };
 
-function useChains(): UseChainResult {
+function useChains(): UseChainsResult {
   const { currentChain, chains } = useSnapshot(providerStore);
   return { currentChain, chains };
 }

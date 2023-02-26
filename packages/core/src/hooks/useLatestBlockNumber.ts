@@ -8,7 +8,7 @@ type UseLatestBlockNumberConfig = BaseUseQueryConfig<string> & {
   refetchInterval?: number | false;
 };
 
-function useLatestBlockNumber(options?: UseLatestBlockNumberConfig): BaseUseQueryResult<string> {
+function useLatestBlockNumber(config?: UseLatestBlockNumberConfig): BaseUseQueryResult<string> {
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
@@ -18,9 +18,9 @@ function useLatestBlockNumber(options?: UseLatestBlockNumberConfig): BaseUseQuer
       const blockNumber = await defaultProvider.getBlockNumber();
       return blockNumber.toString();
     },
-    onSuccess: options?.onSuccess,
-    onError: options?.onError,
-    refetchInterval: options?.refetchInterval,
+    onSuccess: config?.onSuccess,
+    onError: config?.onError,
+    refetchInterval: config?.refetchInterval,
   });
 
   return {
