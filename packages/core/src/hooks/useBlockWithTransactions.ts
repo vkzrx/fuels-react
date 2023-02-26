@@ -5,7 +5,12 @@ import type { UseBlockConfig, UseBlockResult } from './useBlock';
 import { BlockNotFound, ProviderNotDefined } from '../errors';
 import { providerStore } from '../stores';
 
-type BlockWithTransactions = NonNullable<Awaited<ReturnType<Provider['getBlockWithTransactions']>>>;
+type BlockWithTransactions = Omit<
+  NonNullable<Awaited<ReturnType<Provider['getBlockWithTransactions']>>>,
+  'height'
+> & {
+  height: string;
+};
 
 function useBlockWithTransactions(
   config: UseBlockConfig<BlockWithTransactions>,
@@ -31,7 +36,13 @@ function useBlockWithTransactions(
 
       const block = await defaultProvider.getBlockWithTransactions(blockId);
       if (!block) throw BlockNotFound;
-      return block;
+      return {
+        id: block.id,
+        height: block.height.toString(),
+        time: block.time,
+        transactionId: block.transactionIds,
+        transactions: block.transactions,
+      };
     },
     onSuccess: config.onSuccess,
     onError: config.onError,

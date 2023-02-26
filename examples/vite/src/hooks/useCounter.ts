@@ -3,11 +3,11 @@ import { useContract } from 'fuels-react';
 import type { CounterAbi } from '../contracts';
 import abi from '../contracts/Counter-abi.json';
 
-const contractId = '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74';
+const address = '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74';
 
 function useCounter() {
   const queryClient = useQueryClient();
-  const contract = useContract<CounterAbi>({ contractId, abi });
+  const contract = useContract<CounterAbi>({ address, abi });
 
   const { data, error, isLoading, isSuccess } = useQuery({
     queryKey: ['counter'],

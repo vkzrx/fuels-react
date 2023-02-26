@@ -5,8 +5,8 @@ import { providerStore } from '../stores';
 import type { Chain } from '../stores';
 
 type UseProviderResult = {
-  chains: Chain[] | null;
   provider: Provider;
+  chains: Chain[] | null;
 };
 
 function useProvider(): UseProviderResult {

@@ -61,6 +61,13 @@ class TransactionNotFound extends Error {
   }
 }
 
+class TransactionRequestNotCorrect extends Error {
+  constructor(message?: string) {
+    super(message);
+    Object.setPrototypeOf(this, TransactionRequestNotCorrect.prototype);
+  }
+}
+
 export {
   AddressNotCorrect,
   BlockNotFound,
@@ -68,6 +75,7 @@ export {
   ProviderNotDefined,
   TransactionIDNotCorrect,
   TransactionNotFound,
+  TransactionRequestNotCorrect,
   UserAlreadyConnected,
   UserAlreadyDisconnected,
   UserWalletNotDefined,

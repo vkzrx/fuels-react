@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import type { Provider, TransactionRequestLike } from 'fuels';
 import { useSnapshot } from 'valtio';
 import { providerStore } from '../stores';
-import { ProviderNotDefined } from '../errors';
+import { ProviderNotDefined, TransactionRequestNotCorrect } from '../errors';
 import { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
 
 type TransactionCostResponse = Awaited<ReturnType<Provider['getTransactionCost']>>;
 
 type UseTransactionCostConfig = BaseUseQueryConfig<TransactionCostResponse> & {
-  transactionRequest: TransactionRequestLike;
+  transactionRequest: TransactionRequestLike | null;
   tolerance?: number;
 };
 
@@ -21,6 +21,7 @@ function useTransactionCost(
     queryKey: ['transactionCost'],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
+      if (!config.transactionRequest) throw TransactionRequestNotCorrect;
       const transactionCost = await defaultProvider.getTransactionCost(
         config.transactionRequest,
         config.tolerance,
@@ -29,6 +30,7 @@ function useTransactionCost(
     },
     onSuccess: config.onSuccess,
     onError: config.onError,
+    enabled: !!config.transactionRequest,
   });
 
   return {

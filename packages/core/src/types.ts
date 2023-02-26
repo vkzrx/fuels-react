@@ -12,7 +12,7 @@ export type BaseUseQueryResult<TData> = Pick<
   'data' | 'status' | 'error' | 'isError' | 'isFetching' | 'isLoading' | 'isSuccess'
 >;
 
-export type BaseUseMutationConfig<TData, TVariables = void> = Pick<
+export type BaseUseMutationConfig<TData = void, TVariables = void> = Pick<
   UseMutationOptions<TData, unknown, TVariables>,
   'onError' | 'onSuccess'
 >;
