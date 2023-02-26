@@ -1,5 +1,15 @@
 # fuels-react
 
+## 0.1.8
+
+### Patch Changes
+
+- 1cc9e6c: feat: Make `types` more intuitive
+
+  - `BN` -> `string`
+  - Add missing `onSuccess` and `onError` callbacks
+  - Allow to pass `null` as transaction request to useTransactionCost()
+
 ## 0.1.7
 
 ### Patch Changes
