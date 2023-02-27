@@ -1,5 +1,21 @@
 # fuels-react
 
+## 0.2.0
+
+### Minor Changes
+
+- e836efd: feat: add new hooks
+
+  - useCoins()
+  - useSendTransaction()
+  - useMessages()
+
+  Update the documentation
+
+### Patch Changes
+
+- c21b5cc: Fix: Incorrect `block` return data
+
 ## 0.1.8
 
 ### Patch Changes
