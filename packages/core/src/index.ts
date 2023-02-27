@@ -9,6 +9,7 @@ import useDisconnect from './hooks/useDisconnect';
 import useLatestBlockNumber from './hooks/useLatestBlockNumber';
 import useChains from './hooks/useChains';
 import useProvider from './hooks/useProvider';
+import useSendTransaction from './hooks/useSendTransaction';
 import useSignMessage from './hooks/useSignMessage';
 import useTransfer from './hooks/useTransfer';
 import useTransaction from './hooks/useTransaction';
@@ -34,6 +35,7 @@ export {
   useLatestBlockNumber,
   useChains,
   useProvider,
+  useSendTransaction,
   useSignMessage,
   useTransfer,
   useTransaction,
