@@ -8,9 +8,9 @@ import type {
   TransactionRequestLike,
   TransactionResponse,
 } from 'fuels';
-import { UserWalletNotDefined } from '../errors';
-import { userStore } from '../stores';
-import type { BaseUseMutationConfig, BaseUseMutationResult } from '../types';
+import { UserWalletNotDefined } from '../../errors';
+import { userStore } from '../../stores';
+import type { BaseUseMutationConfig, BaseUseMutationResult } from '../../types';
 
 type TransferParams = {
   destination: AbstractAddress;

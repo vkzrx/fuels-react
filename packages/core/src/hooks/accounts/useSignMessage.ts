@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import type { MutateOptions } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
-import { UserWalletNotDefined } from '../errors';
-import { userStore } from '../stores';
-import type { BaseUseMutationConfig, BaseUseMutationResult } from '../types';
+import { UserWalletNotDefined } from '../../errors';
+import { userStore } from '../../stores';
+import type { BaseUseMutationConfig, BaseUseMutationResult } from '../../types';
 
 type UseMessageConfig = BaseUseMutationConfig<string, string> & {
   message: string;

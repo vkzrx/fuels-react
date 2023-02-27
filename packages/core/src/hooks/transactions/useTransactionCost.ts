@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Provider, TransactionRequestLike } from 'fuels';
 import { useSnapshot } from 'valtio';
-import { providerStore } from '../stores';
-import { ProviderNotDefined, TransactionRequestNotCorrect } from '../errors';
-import { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
+import { providerStore } from '../../stores';
+import { ProviderNotDefined, TransactionRequestNotCorrect } from '../../errors';
+import { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type TransactionCostResponse = Awaited<ReturnType<Provider['getTransactionCost']>>;
 

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Block as FuelBlock } from 'fuels';
 import { useSnapshot } from 'valtio';
-import { BlockNotFound, ProviderNotDefined } from '../errors';
-import { providerStore } from '../stores';
-import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
+import { BlockNotFound, ProviderNotDefined } from '../../errors';
+import { providerStore } from '../../stores';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type Block = Omit<FuelBlock, 'height'> & {
   height: string;

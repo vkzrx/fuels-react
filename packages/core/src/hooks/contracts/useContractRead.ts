@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Contract } from 'fuels';
 import type { AbstractAddress, Interface, JsonAbi } from 'fuels';
 import { subscribe, useSnapshot } from 'valtio';
-import { ProviderNotDefined } from '../errors';
-import { providerStore } from '../stores';
+import { ProviderNotDefined } from '../../errors';
+import { providerStore } from '../../stores';
 
 type UseContractReadConfig<T extends Contract> = {
   contractId: string | AbstractAddress;

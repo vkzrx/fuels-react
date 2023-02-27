@@ -1,33 +1,32 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address } from 'fuels';
-import type { CursorPaginationArgs, Message } from 'fuels';
+import type { Coin, CursorPaginationArgs } from 'fuels';
 import { useSnapshot } from 'valtio';
-import { AddressNotCorrect, ProviderNotDefined } from '../errors';
-import { providerStore } from '../stores';
-import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
+import { AddressNotCorrect, ProviderNotDefined } from '../../errors';
+import { providerStore } from '../../stores';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
-type UseMessagesConfig = BaseUseQueryConfig<Message[]> & {
+type UseCoinsConfig = BaseUseQueryConfig<Coin[]> & {
   address: string | null;
+  assetId?: string;
   pagination?: CursorPaginationArgs;
-  refetchInterval?: number | false;
 };
 
-function useMessages(config?: UseMessagesConfig): BaseUseQueryResult<Message[]> {
+function useCoins(config?: UseCoinsConfig): BaseUseQueryResult<Coin[]> {
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['messages'],
+    queryKey: ['coins'],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       if (!config?.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
-      const messages = await defaultProvider.getMessages(address, config.pagination);
-      return messages;
+      const coins = await defaultProvider.getCoins(address, config.assetId, config.pagination);
+      return coins;
     },
     onSuccess: config?.onSuccess,
     onError: config?.onError,
     enabled: !!config?.address,
-    refetchInterval: config?.refetchInterval,
   });
 
   return {
@@ -41,4 +40,4 @@ function useMessages(config?: UseMessagesConfig): BaseUseQueryResult<Message[]> 
   };
 }
 
-export default useMessages;
+export default useCoins;

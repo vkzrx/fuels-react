@@ -2,10 +2,10 @@ import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import type { TransactionRequestLike, TransactionResponse } from 'fuels';
-import { TransactionRequestNotCorrect, UserWalletNotDefined } from '../errors';
-import { userStore } from '../stores';
-import { transactionTypeToNativeEnum } from '../types';
-import type { BaseUseMutationConfig, BaseUseMutationResult, TransactionRequest } from '../types';
+import { TransactionRequestNotCorrect, UserWalletNotDefined } from '../../errors';
+import { userStore } from '../../stores';
+import { transactionTypeToNativeEnum } from '../../types';
+import type { BaseUseMutationConfig, BaseUseMutationResult, TransactionRequest } from '../../types';
 
 type UseSendTransactionConfig = BaseUseMutationConfig<TransactionResponse> & {
   request: TransactionRequest;

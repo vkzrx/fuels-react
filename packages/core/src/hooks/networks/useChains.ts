@@ -1,6 +1,6 @@
 import { useSnapshot } from 'valtio';
-import { providerStore } from '../stores';
-import type { Chain } from '../stores';
+import { providerStore } from '../../stores';
+import type { Chain } from '../../stores';
 
 type UseChainsResult = {
   currentChain: Chain | null;

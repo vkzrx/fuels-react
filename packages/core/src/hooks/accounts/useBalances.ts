@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Address } from 'fuels';
 import type { CoinQuantity, CursorPaginationArgs } from 'fuels';
 import { useSnapshot } from 'valtio';
-import { providerStore } from '../stores';
-import { AddressNotCorrect, ProviderNotDefined } from '../errors';
-import type { BaseUseQueryConfig, BaseUseQueryResult } from '../types';
+import { providerStore } from '../../stores';
+import { AddressNotCorrect, ProviderNotDefined } from '../../errors';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type CoinBalance = Omit<CoinQuantity, 'amount' | 'max'> & {
   amount: string;

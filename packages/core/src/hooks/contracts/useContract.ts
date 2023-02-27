@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Contract } from 'fuels';
 import type { AbstractAddress, BaseWalletLocked, Interface, JsonAbi, Provider } from 'fuels';
 import { subscribe, useSnapshot } from 'valtio';
-import { ProviderNotDefined } from '../errors';
-import { providerStore, userStore } from '../stores';
+import { ProviderNotDefined } from '../../errors';
+import { providerStore, userStore } from '../../stores';
 
 type UseContractConfig = {
   address: string | AbstractAddress;

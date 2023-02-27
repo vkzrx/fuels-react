@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import type { Provider } from 'fuels';
 import { useSnapshot } from 'valtio';
 import type { UseBlockConfig, UseBlockResult } from './useBlock';
-import { BlockNotFound, ProviderNotDefined } from '../errors';
-import { providerStore } from '../stores';
+import { BlockNotFound, ProviderNotDefined } from '../../errors';
+import { providerStore } from '../../stores';
 
 type BlockWithTransactions = Omit<
   NonNullable<Awaited<ReturnType<Provider['getBlockWithTransactions']>>>,

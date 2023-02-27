@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
-import { connect as connect_, userStore } from '../stores';
-import type { UserStatus } from '../stores';
-import type { BaseUseMutationConfig, BaseUseMutationResult } from '../types';
+import { connect as connect_, userStore } from '../../stores';
+import type { UserStatus } from '../../stores';
+import type { BaseUseMutationConfig, BaseUseMutationResult } from '../../types';
 
 type UseConnectResult = Omit<BaseUseMutationResult, 'data' | 'status'> & {
   isConnected: boolean;
