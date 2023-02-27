@@ -2,6 +2,7 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import useBalance from './hooks/useBalance';
 import useBlock from './hooks/useBlock';
 import useBlockWithTransactions from './hooks/useBlockWithTransactions';
+import useCoins from './hooks/useCoins';
 import useConnect from './hooks/useConnect';
 import useContract from './hooks/useContract';
 import useDisconnect from './hooks/useDisconnect';
@@ -26,6 +27,7 @@ export {
   useBalance,
   useBlock,
   useBlockWithTransactions,
+  useCoins,
   useConnect,
   useContract,
   useDisconnect,
