@@ -17,6 +17,7 @@ function App() {
   return (
     <>
       <div>Status: {coins.status}</div>
+      <div>Found: {coins.data?.length}</div>
     </>
   );
 }

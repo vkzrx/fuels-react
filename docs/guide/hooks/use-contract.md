@@ -71,26 +71,27 @@ type UseContractConfig = {
 
 ### address
 
+`type: string | AbstractAddress`
+
 Contract address your `Contract` instance will be connected to.
 
-```tsx {7}
+```tsx {5}
 import { useContract } from 'fuels-react';
-import type { CounterAbi } from './contracts/Counter';
-import counterAbi from './contracts/counterAbi.json';
 
 function App() {
-  const contract = useContract<CounterAbi>({
+  const contract = useContract({
     address: '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74',
-    abi: counterAbi,
   });
 }
 ```
 
 ### abi
 
+`type: JsonAbi | Interface`
+
 Contract abi your `Contract` instance will use to craft payloads.
 
-```tsx {8}
+```tsx {2,3,6,8}
 import { useContract } from 'fuels-react';
 import type { CounterAbi } from './contracts/Counter';
 import counterAbi from './contracts/counterAbi.json';
@@ -104,6 +105,8 @@ function App() {
 ```
 
 ### signerOrProvider (optional)
+
+`type: BaseWalletLocked | Provider`
 
 Custom signer or provider you want to use if needed. Defaults to the provider injected by the user wallet, if not injected then it fallbacks to the provider used when creating the client.
 
