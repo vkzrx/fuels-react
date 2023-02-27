@@ -87,7 +87,7 @@ import { useMessages } from 'fuels-react';
 function App() {
   const messages = useMessages({
     address: 'fuel1wc9hhur34dywx3cvkynhaegw8yyyfcd646fp9qaln720w9jw6xzsjz755w',
-    refetchInterval: 1000
+    refetchInterval: 1000,
   });
 }
 ```

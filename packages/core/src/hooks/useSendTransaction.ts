@@ -8,7 +8,7 @@ import { transactionTypeToNativeEnum } from '../types';
 import type { BaseUseMutationConfig, BaseUseMutationResult, TransactionRequest } from '../types';
 
 type UseSendTransactionConfig = BaseUseMutationConfig<TransactionResponse> & {
-  request: TransactionRequest
+  request: TransactionRequest;
 };
 
 type UseSendTransactionResult = BaseUseMutationResult<TransactionResponse> & {
@@ -33,7 +33,7 @@ function useSendTransaction(config?: UseSendTransactionConfig): UseSendTransacti
         outputs: request.outputs,
         maturity: request.maturity,
         witnesses: request.witnesses,
-      }
+      };
       return store.wallet.sendTransaction(transaction);
     },
     onSuccess: config?.onSuccess,

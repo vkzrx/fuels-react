@@ -29,10 +29,10 @@ type TransactionRequest = {
   type: 'script' | 'create' | 'mint';
   gasLimit?: string;
   gasPrice?: string;
-  inputs?: TransactionRequestInput[],
-  outputs?: TransactionRequestOutput[],
-  maturity?: number,
-  witnesses?: (string | Bytes)[],
+  inputs?: TransactionRequestInput[];
+  outputs?: TransactionRequestOutput[];
+  maturity?: number;
+  witnesses?: (string | Bytes)[];
 };
 
 type UseSendTransactionConfig = {
