@@ -1,38 +1,35 @@
 import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import type { MutateOptions } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
-import { UserWalletNotDefined } from '../../errors';
+import { MessageNotCorrect, UserWalletNotDefined } from '../../errors';
 import { userStore } from '../../stores';
 import type { BaseUseMutationConfig, BaseUseMutationResult } from '../../types';
 
-type UseMessageConfig = BaseUseMutationConfig<string, string> & {
-  message: string;
+type UseMessageConfig = BaseUseMutationConfig<string> & {
+  message: string | null;
 };
 
-type UseSignMessageResult = BaseUseMutationResult<string, string> & {
-  signMessage: (params: string, options?: MutateOptions<string, unknown, string>) => void;
+type UseSignMessageResult = BaseUseMutationResult<string> & {
+  signMessage: () => void;
 };
 
-function useSignMessage(config?: UseMessageConfig): UseSignMessageResult {
+function useSignMessage(config: UseMessageConfig): UseSignMessageResult {
   const store = useSnapshot(userStore);
 
   const signMessageMutation = useMutation({
     mutationKey: ['signMessage'],
-    mutationFn: async (message) => {
+    mutationFn: async () => {
       if (!store.wallet) throw UserWalletNotDefined;
-      return store.wallet.signMessage(message);
+      if (!config.message) throw MessageNotCorrect;
+      return store.wallet.signMessage(config.message);
     },
     onSuccess: config?.onSuccess,
     onError: config?.onError,
   });
 
-  const signMessage = useCallback(
-    (message: string, options?: MutateOptions<string, unknown, string>) => {
-      return signMessageMutation.mutate(message, options);
-    },
-    [signMessageMutation.mutate],
-  );
+  const signMessage = useCallback(() => {
+    return signMessageMutation.mutate();
+  }, [signMessageMutation.mutate]);
 
   return {
     signMessage,

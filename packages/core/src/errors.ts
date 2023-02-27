@@ -47,6 +47,13 @@ class BlockNotFound extends Error {
   }
 }
 
+class MessageNotCorrect extends Error {
+  constructor(message?: string) {
+    super(message);
+    Object.setPrototypeOf(this, MessageNotCorrect.prototype);
+  }
+}
+
 class TransactionIDNotCorrect extends Error {
   constructor(message?: string) {
     super(message);
@@ -72,6 +79,7 @@ export {
   AddressNotCorrect,
   BlockNotFound,
   ContractNotFound,
+  MessageNotCorrect,
   ProviderNotDefined,
   TransactionIDNotCorrect,
   TransactionNotFound,

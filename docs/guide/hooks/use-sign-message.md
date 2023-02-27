@@ -26,7 +26,7 @@ function App() {
 
 ```ts
 type UseSignMessageConfig = {
-  message: string;
+  message: string | null;
   onSuccess?: ((data: string, variables: string) => void) | undefined;
   onError?: ((error: unknown, variables: string) => void) | undefined;
 };
@@ -34,7 +34,7 @@ type UseSignMessageConfig = {
 
 ### message
 
-`type: string`
+`type: string | null`
 
 Message to sign
 
