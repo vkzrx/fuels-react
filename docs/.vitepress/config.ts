@@ -27,9 +27,9 @@ export default defineConfig({
       pattern: 'https://github.com/0xYami/fuels-react/edit/main/docs/:path',
     },
     algolia: {
-      appId: '',
-      apiKey: '',
-      indexName: '',
+      appId: '4F32R5K9VK',
+      apiKey: '36704de0ab75b163a0e20e183108a71f',
+      indexName: 'fuels-react',
     },
     outline: [2, 3],
     nav: [
