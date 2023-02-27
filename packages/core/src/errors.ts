@@ -40,17 +40,17 @@ class ContractNotFound extends Error {
   }
 }
 
-class TransactionIDNotCorrect extends Error {
-  constructor(message?: string) {
-    super(message);
-    Object.setPrototypeOf(this, AddressNotCorrect.prototype);
-  }
-}
-
 class BlockNotFound extends Error {
   constructor(message?: string) {
     super(message);
     Object.setPrototypeOf(this, BlockNotFound.prototype);
+  }
+}
+
+class TransactionIDNotCorrect extends Error {
+  constructor(message?: string) {
+    super(message);
+    Object.setPrototypeOf(this, AddressNotCorrect.prototype);
   }
 }
 

@@ -2,12 +2,15 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import useBalance from './hooks/useBalance';
 import useBlock from './hooks/useBlock';
 import useBlockWithTransactions from './hooks/useBlockWithTransactions';
+import useCoins from './hooks/useCoins';
 import useConnect from './hooks/useConnect';
 import useContract from './hooks/useContract';
 import useDisconnect from './hooks/useDisconnect';
 import useLatestBlockNumber from './hooks/useLatestBlockNumber';
 import useChains from './hooks/useChains';
+import useMessages from './hooks/useMessages';
 import useProvider from './hooks/useProvider';
+import useSendTransaction from './hooks/useSendTransaction';
 import useSignMessage from './hooks/useSignMessage';
 import useTransfer from './hooks/useTransfer';
 import useTransaction from './hooks/useTransaction';
@@ -26,12 +29,15 @@ export {
   useBalance,
   useBlock,
   useBlockWithTransactions,
+  useCoins,
   useConnect,
   useContract,
   useDisconnect,
   useLatestBlockNumber,
   useChains,
+  useMessages,
   useProvider,
+  useSendTransaction,
   useSignMessage,
   useTransfer,
   useTransaction,
