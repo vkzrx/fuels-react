@@ -1,6 +1,9 @@
 ---
 layout: home
 
+title: Fuels React
+titleTemplate: Collection of React Hooks
+
 hero:
   name: Fuels React
   text: React library for the Fuel blockchain
@@ -19,11 +22,11 @@ features:
     details: Hook-based library, if you know React hooks you already know how to use this library.
   - icon: 🔑
     title: Type Safe
-    details: Written in TypeScript to provide the best developer experience possible.
+    details: Written in TypeScript to provide the best developer experience.
   - icon: 📦
     title: Features Rich
-    details: 15+ hooks ready to work with Fuel official wallet, contracts, transactions and more.
+    details: 15+ hooks ready to work with the Fuel official wallet, contracts, transactions and more.
   - icon: 🏗
     title: Modular
-    details: Compose your own hooks based on the ones provided.
+    details: Compose your own hooks on-top of the ones provided.
 ---

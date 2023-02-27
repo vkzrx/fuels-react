@@ -70,7 +70,7 @@ function App() {
 
 ### onSuccess (optional)
 
-`type: ((data: Transaction) => void) | undefined`
+`type: ((data: TransactionCost) => void) | undefined`
 
 Callback to trigger a `side-effect` once fetching the transaction cost is successful.
 
@@ -81,7 +81,7 @@ function App() {
   const transactionCost = useTransactionCost({
     transactionRequest: '',
     onSuccess: (data) => {
-      alert(`Fetched transactionCost ${data.id}`);
+      alert(`Fetched transaction cost ${data.fee}`);
     },
   });
 }
@@ -100,7 +100,7 @@ function App() {
   const transactionCost = useTransactionCost({
     transactionRequest: '',
     onError: (error) => {
-      alert('Failed to fetch transactionCost');
+      alert('Failed to fetch transaction cost');
     },
   });
 }

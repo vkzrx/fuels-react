@@ -26,7 +26,7 @@ Connecting to `localhost` is not available yet.
 
 ### QueryClient
 
-Under the hook we use [TanStack Query](https://tanstack.com/query/latest) so we also expose the configuration to allow you to configure it if needed.
+Under the hood we use [TanStack Query](https://tanstack.com/query/latest) so we also expose the configuration to allow you to configure it if needed.
 
 ```ts {3-8}
 const client = createClient({

@@ -3,9 +3,29 @@ import { version } from '../../packages/core/package.json';
 
 export default defineConfig({
   title: 'Fuels React',
+  description: 'React Library for the Fuel Blockchain',
+  lang: 'en-US',
   cleanUrls: true,
+  lastUpdated: true,
+  head: [
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'Fuels React ⚡' }],
+    ['meta', { property: 'og:url', content: 'https://fuels-react.com' }],
+    ['meta', { property: 'og:description', content: 'React Library for the Fuel Blockchain' }],
+    ['meta', { property: 'og:image', content: 'https://fuels-react.com/preview.png' }],
+    ['meta', { name: 'twitter:url', content: 'https://fuels-react.com' }],
+    ['meta', { name: 'twitter:title', content: 'Fuels React ⚡' }],
+    ['meta', { name: 'twitter:description', content: 'React Library for the Fuel Blockchain' }],
+    ['meta', { name: 'twitter:site', content: '@0xYami9' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:image', content: 'https://fuels-react.com/preview.png' }],
+  ],
   themeConfig: {
     siteTitle: 'Fuels React',
+    editLink: {
+      text: 'Suggest changes to this page',
+      pattern: 'https://github.com/0xYami/fuels-react/edit/main/docs/:path',
+    },
     algolia: {
       appId: '',
       apiKey: '',
@@ -58,6 +78,7 @@ export default defineConfig({
               { text: 'useSignMessage', link: '/guide/hooks/use-sign-message' },
               { text: 'useTransaction', link: '/guide/hooks/use-transaction' },
               { text: 'useTransactionCost', link: '/guide/hooks/use-transaction-cost' },
+              { text: 'useWallet', link: '/guide/hooks/use-wallet' },
             ],
           },
         ],
