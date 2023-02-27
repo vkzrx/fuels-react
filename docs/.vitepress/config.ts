@@ -5,7 +5,6 @@ export default defineConfig({
   title: 'Fuels React',
   description: 'React Library for the Fuel Blockchain',
   lang: 'en-US',
-  cleanUrls: true,
   lastUpdated: true,
   head: [
     ['meta', { property: 'og:type', content: 'website' }],
