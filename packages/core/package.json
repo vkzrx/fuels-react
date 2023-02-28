@@ -1,7 +1,7 @@
 {
   "name": "fuels-react",
   "description": "React library for the Fuel blockchain",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "0xYami",
     "email": "0xYami@proton.me"
