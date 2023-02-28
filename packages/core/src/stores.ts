@@ -7,7 +7,7 @@ import { ProviderNotDefined, UserAlreadyConnected, UserAlreadyDisconnected } fro
 import { asyncFaillable } from './utils';
 
 export type Chain = {
-  name: 'beta-1' | 'beta-2';
+  name: 'beta-1' | 'beta-2' | 'localhost';
   url: string;
 };
 

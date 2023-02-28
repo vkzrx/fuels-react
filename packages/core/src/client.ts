@@ -14,6 +14,7 @@ export type ClientConfig = {
 const chainToURL: Record<Chain['name'], string> = {
   'beta-1': 'https://node-beta-1.fuel.network/graphql',
   'beta-2': 'https://node-beta-2.fuel.network/graphql',
+  localhost: 'http://127.0.0.1:4000/graphql',
 };
 
 class Client {
