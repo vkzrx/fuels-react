@@ -97,6 +97,7 @@ export const disconnect = async () => {
   const askDisconnection = await asyncFaillable(fuel.disconnect());
 
   if (askDisconnection.failed) {
+    userStore.status = 'connected';
     throw askDisconnection.reason;
   }
 
