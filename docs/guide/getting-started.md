@@ -1,6 +1,6 @@
 # Getting Started
 
-This section will guide you through the installation and setup of `fuels-react`. You can also try it online on [StackBlitz](https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite). It spins up in a few seconds a Vite project with `fuels-react` already installed and set up.
+This section will guide you through the installation and setup of `fuels-react`. You can also try it online on [StackBlitz](https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite). It will spin up in a few seconds a Vite project with `fuels-react` already installed and set up.
 
 :::warning
 This library is currently in `pre-alpha`. It provides core features to develop on Fuel but things might change or break between a release and another.

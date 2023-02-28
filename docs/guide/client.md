@@ -20,15 +20,19 @@ const client = createClient({
 });
 ```
 
-:::info NOTE
-Connecting to `localhost` is not available yet.
-:::
+If you have a chain running locally you want to connect to, specify `localhost` and it will connect to `http://127.0.0.1:4000/graphql`
+
+```ts {2}
+const client = createClient({
+  chains: ['localhost'],
+});
+```
 
 ### QueryClient
 
 Under the hood we use [TanStack Query](https://tanstack.com/query/latest) so we also expose the configuration to allow you to configure it if needed.
 
-```ts {3-8}
+```ts {3-9}
 const client = createClient({
   chains: ['beta-2'],
   queryClientConfig: {
@@ -41,4 +45,18 @@ const client = createClient({
 });
 ```
 
-Refer to their [documentation](https://tanstack.com/query/v4/docs/react/reference/QueryClient) for a more detailed usage.
+By default we use the following configuration
+
+```ts
+queryClientConfig = {
+  defaultOptions: {
+    queries: {
+      cacheTime: 1_000 * 60 * 60 * 24, // 24 hours
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+  },
+},
+```
+
+Refer to the official [documentation](https://tanstack.com/query/v4/docs/react/reference/QueryClient) for a more detailed usage.

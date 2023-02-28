@@ -35,7 +35,7 @@ type UseMessagesConfig = {
     after?: string | null;
   };
   refetchInterval?: number | false;
-  onSuccess?: ((data: string) => void) | undefined;
+  onSuccess?: ((data: Message[]) => void) | undefined;
   onError?: ((error: unknown) => void) | undefined;
 };
 ```

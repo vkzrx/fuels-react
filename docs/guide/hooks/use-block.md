@@ -31,7 +31,7 @@ function App() {
 ```ts
 type UseBlockConfig = {
   idOrHeight: number | string | null;
-  onSuccess?: ((data: string) => void) | undefined;
+  onSuccess?: ((data: Block) => void) | undefined;
   onError?: ((error: unknown) => void) | undefined;
 };
 ```
