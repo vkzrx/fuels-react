@@ -21,18 +21,28 @@ class Client {
   readonly chains: Chain[];
   readonly queryClient: QueryClient;
 
-  constructor(config: ClientConfig) {
-    this.queryClient = new QueryClient(config.queryClientConfig);
+  constructor({
+    chains,
+    queryClientConfig = {
+      defaultOptions: {
+        queries: {
+          cacheTime: 1_000 * 60 * 60 * 24, // 24 hours
+          refetchOnWindowFocus: false,
+          retry: 0,
+        },
+      },
+    },
+  }: ClientConfig) {
+    this.queryClient = new QueryClient(queryClientConfig);
 
-    const chains = config.chains.map<Chain>((name) => ({ name, url: chainToURL[name] }));
-    this.chains = chains;
+    this.chains = chains.map<Chain>((name) => ({ name, url: chainToURL[name] }));
 
     // `chains` is a `NonEmptyArray`
-    const currentChain = chains[0];
+    const currentChain = this.chains[0];
 
     providerStore.fuel = window.fuel || null;
     providerStore.defaultProvider = new Provider(currentChain.url);
-    providerStore.chains = chains;
+    providerStore.chains = this.chains;
     providerStore.currentChain = currentChain;
 
     this.asyncInitializeStores();
