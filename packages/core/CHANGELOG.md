@@ -1,5 +1,13 @@
 # fuels-react
 
+## 0.2.1
+
+### Patch Changes
+
+- 6f30d29: Fix: useSignMessage -> pass message to config
+- 2dc3003: Add `localhost` support
+- 8b305b7: Minor fix: set back user status to `connected` if disconnecting has failed
+
 ## 0.2.0
 
 ### Minor Changes
