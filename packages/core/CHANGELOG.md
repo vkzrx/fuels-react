@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.2.2
+
+### Patch Changes
+
+- 8c57a2e: Minor: change default `QueryClient` config
+
 ## 0.2.1
 
 ### Patch Changes
