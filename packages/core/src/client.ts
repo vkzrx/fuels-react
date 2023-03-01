@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 import type { QueryClientConfig } from '@tanstack/react-query';
 import { Provider } from 'fuels';
 import type { Fuel } from '@fuel-wallet/sdk';
-import { providerStore, userStore } from './stores';
+import { userStore } from './stores';
 import type { Chain } from './stores';
 import type { NonEmptyArray } from './types';
 import { InjectedConnector } from './connectors/injected';
@@ -27,6 +27,9 @@ class Client {
   connector: Connector;
 
   #provider: Fuel | undefined;
+  // used to perform action where user wallet is not required
+  // i.e. fetch blocks, transactions etc...
+  #defaultProvider: Provider;
 
   constructor({
     chains,
@@ -47,10 +50,8 @@ class Client {
 
     // `chains` is a `NonEmptyArray`
     const currentChain = this.chains[0];
-
-    providerStore.defaultProvider = new Provider(currentChain.url);
-    providerStore.chains = this.chains;
-    providerStore.currentChain = currentChain;
+    this.#defaultProvider = new Provider(currentChain.url);
+    userStore.currentChain = currentChain;
 
     this.asyncInitializeStores();
   }
@@ -60,6 +61,10 @@ class Client {
     if (!provider) throw ProviderNotDefined;
     if (!this.#provider) this.#provider = provider;
     return provider;
+  }
+
+  getDefaultProvider(): Provider {
+    return this.#defaultProvider;
   }
 
   // Used to retrieve async data

@@ -54,6 +54,7 @@ function useWallet(config?: UseWalletConfig): UseWalletResult {
     address: store.address,
     status: store.status,
     wallet: store.wallet,
+    currentChain: store.currentChain,
     isConnected: store.status === 'connected',
     isDisconnected: store.status === 'disconnected',
     connect,

@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address } from 'fuels';
 import type { CursorPaginationArgs, Message } from 'fuels';
-import { useSnapshot } from 'valtio';
-import { AddressNotCorrect, ProviderNotDefined } from '../../errors';
-import { providerStore } from '../../stores';
+import { useClient } from '../../context';
+import { AddressNotCorrect } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type UseMessagesConfig = BaseUseQueryConfig<Message[]> & {
@@ -13,15 +12,15 @@ type UseMessagesConfig = BaseUseQueryConfig<Message[]> & {
 };
 
 function useMessages(config: UseMessagesConfig): BaseUseQueryResult<Message[]> {
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ['messages', config.address],
     queryFn: async () => {
-      if (!defaultProvider) throw ProviderNotDefined;
+      const provider = client.getDefaultProvider();
       if (!config.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
-      const messages = await defaultProvider.getMessages(address, config.pagination);
+      const messages = await provider.getMessages(address, config.pagination);
       return messages;
     },
     onSuccess: config?.onSuccess,

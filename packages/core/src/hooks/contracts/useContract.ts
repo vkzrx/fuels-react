@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Contract } from 'fuels';
 import type { AbstractAddress, BaseWalletLocked, Interface, JsonAbi, Provider } from 'fuels';
-import { subscribe, useSnapshot } from 'valtio';
-import { ProviderNotDefined } from '../../errors';
-import { providerStore, userStore } from '../../stores';
+import { subscribe } from 'valtio';
+import { useClient } from '../../context';
+import { userStore } from '../../stores';
 
 type UseContractConfig = {
   address: string | AbstractAddress;
@@ -14,13 +14,13 @@ type UseContractConfig = {
 function useContract<T extends Contract>(config: UseContractConfig): T | null {
   const { address, abi, signerOrProvider } = config;
 
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
   const [contract, setContract] = useState<Contract | null>(null);
 
   useEffect(() => {
     // https://valtio.pmnd.rs/docs/how-tos/how-to-avoid-rerenders-manually
     const callback = () => {
-      if (!defaultProvider) throw ProviderNotDefined;
+      const defaultProvider = client.getDefaultProvider();
 
       let walletOrProvider: BaseWalletLocked | Provider = defaultProvider;
 

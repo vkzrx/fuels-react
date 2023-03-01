@@ -1,4 +1,3 @@
-import type { Provider } from 'fuels';
 import type { FuelWalletLocked } from '@fuel-wallet/sdk';
 import { proxy } from 'valtio';
 import { watch } from 'valtio/utils';
@@ -10,25 +9,14 @@ export type Chain = {
   url: string;
 };
 
-export type ProviderStore = {
-  defaultProvider: Provider | null;
-  chains: Chain[] | null;
-  currentChain: Chain | null;
-};
-
 export type UserStatus = 'connected' | 'connecting' | 'disconnected' | 'disconnecting' | 'locked';
 
 export type UserStore = {
   address: string | null;
   wallet: FuelWalletLocked | null;
   status: UserStatus;
+  currentChain: Chain | null;
 };
-
-export const providerStore = proxy<ProviderStore>({
-  defaultProvider: null,
-  chains: null,
-  currentChain: null,
-});
 
 const getPersistedUserState = (): UserStore | null => {
   if (!IS_BROWSER) return null;
@@ -38,8 +26,9 @@ const getPersistedUserState = (): UserStore | null => {
   if (state.status === 'disconnected') return null;
   return {
     address: state.address,
-    wallet: null, // created in initializedStores()
+    wallet: null, // created in asyncInitializedStores()
     status: state.status,
+    currentChain: state.currentChain,
   };
 };
 
@@ -47,6 +36,7 @@ export const userStore = proxy<UserStore>(
   getPersistedUserState() || {
     address: null,
     wallet: null,
+    currentChain: null,
     status: 'disconnected',
   },
 );
@@ -58,6 +48,7 @@ watch((get) => {
     JSON.stringify({
       address: userState.address,
       status: userState.status,
+      currentChain: userStore.currentChain,
     }),
   );
 });
