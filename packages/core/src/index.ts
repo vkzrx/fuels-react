@@ -17,7 +17,8 @@ import useTransaction from './hooks/transactions/useTransaction';
 import useTransactionCost from './hooks/transactions/useTransactionCost';
 import useWallet from './hooks/accounts/useWallet';
 
-export { FuelProvider, createClient, useClient } from './context';
+export { createClient } from './client';
+export { FuelProvider, useClient } from './context';
 export type { UserStatus } from './stores';
 
 // TODO: Find how to better handle react-query context

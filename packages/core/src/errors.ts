@@ -1,3 +1,10 @@
+class ClientNotDefined extends Error {
+  constructor(message?: string) {
+    super(message);
+    Object.setPrototypeOf(this, ClientNotDefined.prototype);
+  }
+}
+
 class ProviderNotDefined extends Error {
   constructor(message?: string) {
     super(message);
@@ -78,6 +85,7 @@ class TransactionRequestNotCorrect extends Error {
 export {
   AddressNotCorrect,
   BlockNotFound,
+  ClientNotDefined,
   ContractNotFound,
   MessageNotCorrect,
   ProviderNotDefined,

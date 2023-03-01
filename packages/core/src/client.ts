@@ -1,10 +1,13 @@
 import { QueryClient } from '@tanstack/react-query';
 import type { QueryClientConfig } from '@tanstack/react-query';
 import { Provider } from 'fuels';
-import { IS_BROWSER } from './constants';
+import type { Fuel } from '@fuel-wallet/sdk';
 import { providerStore, userStore } from './stores';
 import type { Chain } from './stores';
 import type { NonEmptyArray } from './types';
+import { InjectedConnector } from './connectors/injected';
+import { ClientNotDefined, ProviderNotDefined } from './errors';
+import { Connector } from './connectors/base';
 
 export type ClientConfig = {
   chains: NonEmptyArray<Chain['name']>;
@@ -21,6 +24,10 @@ class Client {
   readonly chains: Chain[];
   readonly queryClient: QueryClient;
 
+  connector: Connector;
+
+  #provider: Fuel | undefined;
+
   constructor({
     chains,
     queryClientConfig = {
@@ -34,38 +41,50 @@ class Client {
     },
   }: ClientConfig) {
     this.queryClient = new QueryClient(queryClientConfig);
+    this.connector = new InjectedConnector();
 
     this.chains = chains.map<Chain>((name) => ({ name, url: chainToURL[name] }));
 
     // `chains` is a `NonEmptyArray`
     const currentChain = this.chains[0];
 
-    providerStore.fuel = window.fuel || null;
     providerStore.defaultProvider = new Provider(currentChain.url);
     providerStore.chains = this.chains;
     providerStore.currentChain = currentChain;
 
     this.asyncInitializeStores();
+  }
 
-    if (IS_BROWSER) {
-      // add `fuel` to store once injected
-      document.addEventListener('FuelLoaded', () => {
-        if (providerStore.fuel) return;
-        if (!window.fuel) return;
-        providerStore.fuel = window.fuel;
-      });
-    }
+  getProvider(): Fuel {
+    const provider = this.connector.getProvider();
+    if (!provider) throw ProviderNotDefined;
+    if (!this.#provider) this.#provider = provider;
+    return provider;
   }
 
   // Used to retrieve async data
   async asyncInitializeStores() {
-    const { fuel } = providerStore;
+    const provider = this.getProvider();
     // no provider injected
-    if (!fuel) return;
-    if (!(await fuel.isConnected())) return;
-    const currentAccount = await fuel.currentAccount();
-    userStore.wallet = await fuel.getWallet(currentAccount);
+    if (!provider) return;
+    if (!(await provider.isConnected())) return;
+    const currentAccount = await provider.currentAccount();
+    userStore.wallet = await provider.getWallet(currentAccount);
   }
 }
 
-export default Client;
+let client: Client | null = null;
+
+function createClient(options: ClientConfig): Client {
+  if (!client) {
+    client = new Client(options);
+  }
+  return client;
+}
+
+function getClient(): Client {
+  if (!client) throw ClientNotDefined;
+  return client;
+}
+
+export { createClient, getClient, Client };
