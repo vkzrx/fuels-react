@@ -10,6 +10,8 @@ module.exports = defineConfig({
   rules: {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+    '@typescript-eslint/prefer-ts-expect-error': 'error',
   },
-  ignorePatterns: ['CHANGELOG.md', 'build', 'dist', 'node_modules', '**/*.config.cjs'],
+  ignorePatterns: ['CHANGELOG.md', 'dist', 'node_modules', '**/*.config.cjs'],
 });
