@@ -1,5 +1,13 @@
 # @examples/vite
 
+## 0.0.12
+
+### Patch Changes
+
+- 8c57a2e: Minor: change default `QueryClient` config
+- Updated dependencies [8c57a2e]
+  - fuels-react@0.2.2
+
 ## 0.0.11
 
 ### Patch Changes
