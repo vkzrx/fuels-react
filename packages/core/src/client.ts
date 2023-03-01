@@ -73,8 +73,12 @@ class Client {
     // no provider injected
     if (!provider) return;
     if (!(await provider.isConnected())) return;
+
     const currentAccount = await provider.currentAccount();
     userStore.wallet = await provider.getWallet(currentAccount);
+
+    provider.on(provider.events.currentAccount, this.connector.onAccountChanged);
+    provider.on(provider.events.network, this.connector.onChainChanged);
   }
 }
 
