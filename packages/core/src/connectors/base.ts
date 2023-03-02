@@ -1,7 +1,8 @@
 import type { Fuel } from '@fuel-wallet/sdk';
 
 export type FuelChainConfig = {
-  id: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  id: 'Testnet Beta 1' | 'Testnet Beta 2' | (string & {});
   url: string;
 };
 

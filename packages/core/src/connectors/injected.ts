@@ -2,8 +2,14 @@ import type { Fuel } from '@fuel-wallet/sdk';
 import { Connector, type FuelChainConfig } from './base';
 import { IS_BROWSER } from '../constants';
 import { ProviderNotDefined, UserAlreadyConnected, UserAlreadyDisconnected } from '../errors';
-import { store } from '../stores';
+import { store, type Chain } from '../stores';
 import { asyncFaillable } from '../utils';
+
+function normalizeChainName(chain: FuelChainConfig): Chain['name'] {
+  if (chain.id === 'Testnet Beta 1') return 'beta-1';
+  if (chain.id === 'Testnet Beta 2') return 'beta-2';
+  return 'localhost';
+}
 
 export class InjectedConnector extends Connector<Fuel> {
   constructor() {
@@ -14,7 +20,7 @@ export class InjectedConnector extends Connector<Fuel> {
     return IS_BROWSER ? window.fuel : undefined;
   }
 
-  async connect() {
+  async connect(): Promise<void> {
     const provider = this.getProvider();
     if (!provider) throw ProviderNotDefined;
     if (store.status === 'connected') throw UserAlreadyConnected;
@@ -37,7 +43,7 @@ export class InjectedConnector extends Connector<Fuel> {
     store.wallet = await provider.getWallet(currentAccount);
   }
 
-  async disconnect() {
+  async disconnect(): Promise<void> {
     const provider = this.getProvider();
     if (!provider) throw ProviderNotDefined;
     if (store.status === 'disconnected') throw UserAlreadyDisconnected;
@@ -60,14 +66,13 @@ export class InjectedConnector extends Connector<Fuel> {
     store.currentChain = null;
   }
 
-  onAccountChanged(newAccount: string) {
+  onAccountChanged(newAccount: string): void {
     store.address = newAccount;
   }
 
-  onChainChanged(newChain: FuelChainConfig) {
+  onChainChanged(newChain: FuelChainConfig): void {
     store.currentChain = {
-      // TODO: fix this to map to actual chain name
-      name: store.currentChain!.name,
+      name: normalizeChainName(newChain),
       url: newChain.url,
     };
   }
