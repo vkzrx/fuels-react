@@ -11,18 +11,18 @@ export type Chain = {
 
 export type UserStatus = 'connected' | 'connecting' | 'disconnected' | 'disconnecting' | 'locked';
 
-export type UserStore = {
+export type StoreState = {
   address: string | null;
   wallet: FuelWalletLocked | null;
   status: UserStatus;
   currentChain: Chain | null;
 };
 
-const getPersistedUserState = (): UserStore | null => {
+const getPersistedUserState = (): StoreState | null => {
   if (!IS_BROWSER) return null;
   const rawState = localStorage.getItem('fuels-react-state');
   if (rawState === null) return null;
-  const state = JSON.parse(rawState) as UserStore;
+  const state = JSON.parse(rawState) as StoreState;
   if (state.status === 'disconnected') return null;
   return {
     address: state.address,
@@ -32,7 +32,7 @@ const getPersistedUserState = (): UserStore | null => {
   };
 };
 
-export const userStore = proxy<UserStore>(
+export const store = proxy<StoreState>(
   getPersistedUserState() || {
     address: null,
     wallet: null,
@@ -42,13 +42,13 @@ export const userStore = proxy<UserStore>(
 );
 
 watch((get) => {
-  const userState = get(userStore);
+  const userState = get(store);
   localStorage.setItem(
     'fuels-react-state',
     JSON.stringify({
       address: userState.address,
       status: userState.status,
-      currentChain: userStore.currentChain,
+      currentChain: store.currentChain,
     }),
   );
 });

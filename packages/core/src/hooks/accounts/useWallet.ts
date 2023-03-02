@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
-import { connect as connect_, disconnect as disconnect_, userStore } from '../../stores';
-import type { UserStore } from '../../stores';
+import { store as store_, connect as connect_, disconnect as disconnect_ } from '../../stores';
+import type { StoreState } from '../../stores';
 import type { BaseUseMutationConfig } from '../../types';
 
 type UseWalletConfig = {
@@ -10,7 +10,7 @@ type UseWalletConfig = {
   onDisconnect?: BaseUseMutationConfig['onSuccess'];
 };
 
-type UseWalletResult = UserStore & {
+type UseWalletResult = StoreState & {
   isConnected: boolean;
   isDisconnected: boolean;
   connect: () => void;
@@ -20,7 +20,7 @@ type UseWalletResult = UserStore & {
 };
 
 function useWallet(config?: UseWalletConfig): UseWalletResult {
-  const store = useSnapshot(userStore);
+  const store = useSnapshot(store_);
 
   const connectMutation = useMutation({
     mutationKey: ['connect'],

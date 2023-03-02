@@ -9,7 +9,7 @@ import type {
   TransactionResponse,
 } from 'fuels';
 import { UserWalletNotDefined } from '../../errors';
-import { userStore } from '../../stores';
+import { store as store_ } from '../../stores';
 import type { BaseUseMutationConfig, BaseUseMutationResult } from '../../types';
 
 type TransferParams = {
@@ -29,7 +29,7 @@ type UseTransferResult = BaseUseMutationResult<TransactionResponse, TransferPara
 };
 
 function useTransfer(config?: UseTransferConfig): UseTransferResult {
-  const store = useSnapshot(userStore);
+  const store = useSnapshot(store_);
 
   const transferMutation = useMutation({
     mutationKey: ['transfer'],

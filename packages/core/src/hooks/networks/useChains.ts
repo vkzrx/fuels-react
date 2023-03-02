@@ -1,6 +1,6 @@
 import { useSnapshot } from 'valtio';
 import { useClient } from '../../context';
-import { userStore } from '../../stores';
+import { store } from '../../stores';
 import type { Chain } from '../../stores';
 
 type UseChainsResult = {
@@ -10,7 +10,7 @@ type UseChainsResult = {
 
 function useChains(): UseChainsResult {
   const client = useClient();
-  const { currentChain } = useSnapshot(userStore);
+  const { currentChain } = useSnapshot(store);
   return { currentChain, chains: client.chains };
 }
 

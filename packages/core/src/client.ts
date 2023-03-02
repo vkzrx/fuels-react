@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 import type { QueryClientConfig } from '@tanstack/react-query';
 import { Provider } from 'fuels';
 import type { Fuel } from '@fuel-wallet/sdk';
-import { userStore } from './stores';
+import { store } from './stores';
 import type { Chain } from './stores';
 import type { NonEmptyArray } from './types';
 import { InjectedConnector } from './connectors/injected';
@@ -51,7 +51,7 @@ class Client {
     // `chains` is a `NonEmptyArray`
     const currentChain = this.chains[0];
     this.#defaultProvider = new Provider(currentChain.url);
-    userStore.currentChain = currentChain;
+    store.currentChain = currentChain;
 
     this.asyncInitializeStores();
   }
@@ -75,7 +75,7 @@ class Client {
     if (!(await provider.isConnected())) return;
 
     const currentAccount = await provider.currentAccount();
-    userStore.wallet = await provider.getWallet(currentAccount);
+    store.wallet = await provider.getWallet(currentAccount);
 
     provider.on(provider.events.currentAccount, this.connector.onAccountChanged);
     provider.on(provider.events.network, this.connector.onChainChanged);

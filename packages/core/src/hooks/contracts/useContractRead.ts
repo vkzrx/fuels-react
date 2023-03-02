@@ -3,7 +3,7 @@ import { Contract } from 'fuels';
 import type { AbstractAddress, Interface, JsonAbi } from 'fuels';
 import { subscribe } from 'valtio';
 import { useClient } from '../../context';
-import { userStore } from '../../stores';
+import { store } from '../../stores';
 
 type UseContractReadConfig<T extends Contract> = {
   contractId: string | AbstractAddress;
@@ -30,7 +30,7 @@ function useContractRead<T extends Contract>(config: UseContractReadConfig<T>): 
       setContract(contract);
     };
 
-    const unsubscribe = subscribe(userStore, callback);
+    const unsubscribe = subscribe(store, callback);
 
     callback();
 

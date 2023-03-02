@@ -3,7 +3,7 @@ import { Contract } from 'fuels';
 import type { AbstractAddress, BaseWalletLocked, Interface, JsonAbi, Provider } from 'fuels';
 import { subscribe } from 'valtio';
 import { useClient } from '../../context';
-import { userStore } from '../../stores';
+import { store } from '../../stores';
 
 type UseContractConfig = {
   address: string | AbstractAddress;
@@ -26,15 +26,15 @@ function useContract<T extends Contract>(config: UseContractConfig): T | null {
 
       if (signerOrProvider) {
         walletOrProvider = signerOrProvider;
-      } else if (userStore.wallet) {
-        walletOrProvider = userStore.wallet;
+      } else if (store.wallet) {
+        walletOrProvider = store.wallet;
       }
 
       const contract = new Contract(address, abi, walletOrProvider);
       setContract(contract);
     };
 
-    const unsubscribe = subscribe(userStore, callback);
+    const unsubscribe = subscribe(store, callback);
 
     callback();
 
