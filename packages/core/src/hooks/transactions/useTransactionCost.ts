@@ -18,7 +18,7 @@ function useTransactionCost(
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['transactionCost'],
+    queryKey: ['transactionCost', config.transactionRequest],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       if (!config.transactionRequest) throw TransactionRequestNotCorrect;

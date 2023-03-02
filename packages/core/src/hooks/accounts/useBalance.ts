@@ -14,7 +14,7 @@ function useBalance(config: UseBalanceConfig): BaseUseQueryResult<string> {
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isFetching, isLoading, isSuccess } = useQuery({
-    queryKey: ['balance'],
+    queryKey: ['balance', config.address],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       if (!config.address) throw AddressNotCorrect;

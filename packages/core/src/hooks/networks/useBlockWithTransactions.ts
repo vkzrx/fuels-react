@@ -18,7 +18,7 @@ function useBlockWithTransactions(
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, error, status, isError, isFetching, isLoading, isSuccess } = useQuery({
-    queryKey: ['block', config.idOrHeight],
+    queryKey: ['blockWithTransactions', config.idOrHeight],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       if (!config.idOrHeight) throw BlockNotFound;

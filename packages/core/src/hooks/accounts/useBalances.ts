@@ -20,7 +20,7 @@ function useBalances(config: UseBalancesConfig): BaseUseQueryResult<CoinBalance[
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isFetching, isLoading, isSuccess } = useQuery({
-    queryKey: ['balances'],
+    queryKey: ['balances', config.address],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
       if (!config.address) throw AddressNotCorrect;
