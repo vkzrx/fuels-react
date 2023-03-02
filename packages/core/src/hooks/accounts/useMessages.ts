@@ -12,14 +12,14 @@ type UseMessagesConfig = BaseUseQueryConfig<Message[]> & {
   refetchInterval?: number | false;
 };
 
-function useMessages(config?: UseMessagesConfig): BaseUseQueryResult<Message[]> {
+function useMessages(config: UseMessagesConfig): BaseUseQueryResult<Message[]> {
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['messages'],
+    queryKey: ['messages', config.address],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
-      if (!config?.address) throw AddressNotCorrect;
+      if (!config.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
       const messages = await defaultProvider.getMessages(address, config.pagination);
       return messages;

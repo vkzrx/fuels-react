@@ -12,14 +12,14 @@ type UseCoinsConfig = BaseUseQueryConfig<Coin[]> & {
   pagination?: CursorPaginationArgs;
 };
 
-function useCoins(config?: UseCoinsConfig): BaseUseQueryResult<Coin[]> {
+function useCoins(config: UseCoinsConfig): BaseUseQueryResult<Coin[]> {
   const { defaultProvider } = useSnapshot(providerStore);
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['coins'],
+    queryKey: ['coins', config.address],
     queryFn: async () => {
       if (!defaultProvider) throw ProviderNotDefined;
-      if (!config?.address) throw AddressNotCorrect;
+      if (!config.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
       const coins = await defaultProvider.getCoins(address, config.assetId, config.pagination);
       return coins;
