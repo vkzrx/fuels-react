@@ -67,6 +67,10 @@ class Client {
     return this.#defaultProvider;
   }
 
+  setDefaultProvider(chain: Chain): Provider {
+    return this.#defaultProvider = new Provider(chain.url);
+  }
+
   // Used to retrieve async data
   async asyncInitializeStores() {
     const provider = this.getProvider();

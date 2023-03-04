@@ -4,6 +4,7 @@ import { IS_BROWSER } from '../constants';
 import { ProviderNotDefined, UserAlreadyConnected, UserAlreadyDisconnected } from '../errors';
 import { store, type Chain } from '../stores';
 import { asyncFaillable } from '../utils';
+import { getClient } from '../client';
 
 function normalizeChainName(chain: FuelChainConfig): Chain['name'] {
   if (chain.id === 'Testnet Beta 1') return 'beta-1';
@@ -71,9 +72,12 @@ export class InjectedConnector extends Connector<Fuel> {
   }
 
   onChainChanged(newChain: FuelChainConfig): void {
-    store.currentChain = {
+    const client = getClient();
+    const chain: Chain = {
       name: normalizeChainName(newChain),
       url: newChain.url,
     };
+    store.currentChain = chain;
+    client.setDefaultProvider(chain);
   }
 }
