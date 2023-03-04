@@ -1,7 +1,12 @@
 import type { Fuel } from '@fuel-wallet/sdk';
 import { Connector, type FuelChainConfig } from './base';
 import { IS_BROWSER } from '../constants';
-import { ProviderNotDefined, UserAlreadyConnected, UserAlreadyDisconnected } from '../errors';
+import {
+  ChainNotConfigured,
+  ProviderNotDefined,
+  UserAlreadyConnected,
+  UserAlreadyDisconnected,
+} from '../errors';
 import { store, type Chain } from '../stores';
 import { asyncFaillable } from '../utils';
 import { getClient } from '../client';
@@ -73,6 +78,9 @@ export class InjectedConnector extends Connector<Fuel> {
     };
     if (newChain.id === '4') chain.name = 'beta-1';
     if (newChain.id === '1') chain.name = 'beta-2';
+    if (!client.isChainConfigured(chain.name)) {
+      throw ChainNotConfigured;
+    }
     store.currentChain = chain;
     client.setDefaultProvider(chain);
   }

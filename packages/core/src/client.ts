@@ -6,7 +6,7 @@ import { store } from './stores';
 import type { Chain } from './stores';
 import type { NonEmptyArray } from './types';
 import { InjectedConnector } from './connectors/injected';
-import { ClientNotDefined, ProviderNotDefined } from './errors';
+import { ChainNotConfigured, ClientNotDefined, ProviderNotDefined } from './errors';
 import { Connector } from './connectors/base';
 
 export type ClientConfig = {
@@ -54,8 +54,8 @@ class Client {
     this.asyncInitialzeStore();
   }
 
-  isChainConfigured(): boolean {
-    return true;
+  isChainConfigured(name: Chain['name']): boolean {
+    return !!this.chains.find((chain) => chain.name === name);
   }
 
   getProvider(): Fuel {
@@ -93,6 +93,10 @@ class Client {
     };
     if (chain.name === 'Testnet Beta 2') currentChain.name = 'beta-2';
     if (chain.name === 'Testnet Beta 1') currentChain.name = 'beta-1';
+
+    if (!this.isChainConfigured(currentChain.name)) {
+      throw ChainNotConfigured;
+    }
 
     store.wallet = wallet;
     store.status = 'connected';

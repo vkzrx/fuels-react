@@ -1,3 +1,10 @@
+class ChainNotConfigured extends Error {
+  constructor(message?: string) {
+    super(message);
+    Object.setPrototypeOf(this, ChainNotConfigured.prototype);
+  }
+}
+
 class ClientNotDefined extends Error {
   constructor(message?: string) {
     super(message);
@@ -85,6 +92,7 @@ class TransactionRequestNotCorrect extends Error {
 export {
   AddressNotCorrect,
   BlockNotFound,
+  ChainNotConfigured,
   ClientNotDefined,
   ContractNotFound,
   MessageNotCorrect,
