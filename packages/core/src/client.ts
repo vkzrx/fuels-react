@@ -79,7 +79,7 @@ class Client {
     const provider = this.getProvider();
     // no provider injected
     if (!provider || !(await provider.isConnected())) {
-      store.status = 'disconnected'
+      store.status = 'disconnected';
       return;
     }
 
