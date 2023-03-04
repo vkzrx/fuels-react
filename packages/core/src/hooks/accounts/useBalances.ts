@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address } from 'fuels';
 import type { CoinQuantity, CursorPaginationArgs } from 'fuels';
+import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { AddressNotCorrect } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
@@ -17,9 +18,10 @@ type UseBalancesConfig = BaseUseQueryConfig<CoinBalance[]> & {
 
 function useBalances(config: UseBalancesConfig): BaseUseQueryResult<CoinBalance[]> {
   const client = useClient();
+  const { currentChain } = useChains();
 
   const { data, status, error, isError, isFetching, isLoading, isSuccess } = useQuery({
-    queryKey: ['balances', config.address],
+    queryKey: ['balances', config.address, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
       if (!config.address) throw AddressNotCorrect;

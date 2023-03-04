@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Provider } from 'fuels';
+import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { TransactionIDNotCorrect, TransactionNotFound } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
@@ -14,9 +15,10 @@ type UseTransactionResult = BaseUseQueryResult<TransactionResponseData>;
 
 function useTransaction(config: UseTransactionConfig): UseTransactionResult {
   const client = useClient();
+  const { currentChain } = useChains();
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['transaction', config.transactionId],
+    queryKey: ['transaction', config.transactionId, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
       if (!config.transactionId) throw TransactionIDNotCorrect;

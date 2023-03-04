@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address, NativeAssetId } from 'fuels';
+import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { AddressNotCorrect } from '../../errors';
-import useChains from '../networks/useChains';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type UseBalanceConfig = BaseUseQueryConfig<string> & {

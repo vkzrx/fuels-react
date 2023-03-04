@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address } from 'fuels';
 import type { CursorPaginationArgs, Message } from 'fuels';
+import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { AddressNotCorrect } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
@@ -13,9 +14,10 @@ type UseMessagesConfig = BaseUseQueryConfig<Message[]> & {
 
 function useMessages(config: UseMessagesConfig): BaseUseQueryResult<Message[]> {
   const client = useClient();
+  const { currentChain } = useChains();
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['messages', config.address],
+    queryKey: ['messages', config.address, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
       if (!config.address) throw AddressNotCorrect;

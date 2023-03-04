@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Contract } from 'fuels';
 import type { AbstractAddress, BaseWalletLocked, Interface, JsonAbi, Provider } from 'fuels';
 import { subscribe } from 'valtio';
+import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { store } from '../../stores';
 
@@ -15,6 +16,7 @@ function useContract<T extends Contract>(config: UseContractConfig): T | null {
   const { address, abi, signerOrProvider } = config;
 
   const client = useClient();
+  const { currentChain } = useChains();
   const [contract, setContract] = useState<Contract | null>(null);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ function useContract<T extends Contract>(config: UseContractConfig): T | null {
     callback();
 
     return unsubscribe;
-  }, []);
+  }, [currentChain?.name]);
 
   return contract as T | null;
 }

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Provider } from 'fuels';
 import type { UseBlockConfig, UseBlockResult } from './useBlock';
+import useChains from './useChains';
 import { useClient } from '../../context';
 import { BlockNotFound } from '../../errors';
 
@@ -15,9 +16,10 @@ function useBlockWithTransactions(
   config: UseBlockConfig<BlockWithTransactions>,
 ): UseBlockResult<BlockWithTransactions> {
   const client = useClient();
+  const { currentChain } = useChains();
 
   const { data, error, status, isError, isFetching, isLoading, isSuccess } = useQuery({
-    queryKey: ['blockWithTransactions', config.idOrHeight],
+    queryKey: ['blockWithTransactions', config.idOrHeight, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
       if (!config.idOrHeight) throw BlockNotFound;
