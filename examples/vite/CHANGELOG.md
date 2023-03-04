@@ -1,5 +1,21 @@
 # @examples/vite
 
+## 0.1.0
+
+### Minor Changes
+
+- 8e5dbff: feat: Listen wallet events
+
+### Patch Changes
+
+- 8e5dbff: fix: async provider injection
+- Updated dependencies [8e5dbff]
+- Updated dependencies [8e5dbff]
+- Updated dependencies [fadf1de]
+- Updated dependencies [0ad4b5c]
+- Updated dependencies [296a482]
+  - fuels-react@0.3.0
+
 ## 0.0.12
 
 ### Patch Changes
