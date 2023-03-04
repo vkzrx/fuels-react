@@ -8,3 +8,7 @@ export const asyncFaillable = async <T>(fn: Promise<T>): Promise<AsyncFaillable<
     return { failed: true, reason: error };
   }
 };
+
+export const wait = async (ms: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};

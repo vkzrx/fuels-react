@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import type { TransactionRequestLike, TransactionResponse } from 'fuels';
 import { TransactionRequestNotCorrect, UserWalletNotDefined } from '../../errors';
-import { userStore } from '../../stores';
+import { store as store_ } from '../../stores';
 import { transactionTypeToNativeEnum } from '../../types';
 import type { BaseUseMutationConfig, BaseUseMutationResult, TransactionRequest } from '../../types';
 
@@ -16,7 +16,7 @@ type UseSendTransactionResult = BaseUseMutationResult<TransactionResponse> & {
 };
 
 function useSendTransaction(config?: UseSendTransactionConfig): UseSendTransactionResult {
-  const store = useSnapshot(userStore);
+  const store = useSnapshot(store_);
 
   const transferMutation = useMutation({
     mutationKey: ['sendTransaction'],

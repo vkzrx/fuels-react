@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import { MessageNotCorrect, UserWalletNotDefined } from '../../errors';
-import { userStore } from '../../stores';
+import { store as store_ } from '../../stores';
 import type { BaseUseMutationConfig, BaseUseMutationResult } from '../../types';
 
 type UseMessageConfig = BaseUseMutationConfig<string> & {
@@ -14,7 +14,7 @@ type UseSignMessageResult = BaseUseMutationResult<string> & {
 };
 
 function useSignMessage(config: UseMessageConfig): UseSignMessageResult {
-  const store = useSnapshot(userStore);
+  const store = useSnapshot(store_);
 
   const signMessageMutation = useMutation({
     mutationKey: ['signMessage'],

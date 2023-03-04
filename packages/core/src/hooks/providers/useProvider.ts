@@ -1,7 +1,5 @@
 import type { Provider } from 'fuels';
-import { useSnapshot } from 'valtio';
-import { ProviderNotDefined } from '../../errors';
-import { providerStore } from '../../stores';
+import { useClient } from '../../context';
 import type { Chain } from '../../stores';
 
 type UseProviderResult = {
@@ -10,11 +8,10 @@ type UseProviderResult = {
 };
 
 function useProvider(): UseProviderResult {
-  const { chains, defaultProvider } = useSnapshot(providerStore);
-  if (!defaultProvider) throw ProviderNotDefined;
+  const client = useClient();
   return {
-    provider: defaultProvider,
-    chains,
+    provider: client.getDefaultProvider(),
+    chains: client.chains,
   };
 }
 

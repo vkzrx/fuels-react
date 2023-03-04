@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Provider } from 'fuels';
-import { useSnapshot } from 'valtio';
 import type { UseBlockConfig, UseBlockResult } from './useBlock';
-import { BlockNotFound, ProviderNotDefined } from '../../errors';
-import { providerStore } from '../../stores';
+import { useClient } from '../../context';
+import { BlockNotFound } from '../../errors';
 
 type BlockWithTransactions = Omit<
   NonNullable<Awaited<ReturnType<Provider['getBlockWithTransactions']>>>,
@@ -15,12 +14,12 @@ type BlockWithTransactions = Omit<
 function useBlockWithTransactions(
   config: UseBlockConfig<BlockWithTransactions>,
 ): UseBlockResult<BlockWithTransactions> {
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
 
   const { data, error, status, isError, isFetching, isLoading, isSuccess } = useQuery({
     queryKey: ['blockWithTransactions', config.idOrHeight],
     queryFn: async () => {
-      if (!defaultProvider) throw ProviderNotDefined;
+      const provider = client.getDefaultProvider();
       if (!config.idOrHeight) throw BlockNotFound;
 
       let blockId = config.idOrHeight;
@@ -34,7 +33,7 @@ function useBlockWithTransactions(
         }
       }
 
-      const block = await defaultProvider.getBlockWithTransactions(blockId);
+      const block = await provider.getBlockWithTransactions(blockId);
       if (!block) throw BlockNotFound;
       return {
         id: block.id,

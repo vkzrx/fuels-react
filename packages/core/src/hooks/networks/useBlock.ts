@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Block as FuelBlock } from 'fuels';
-import { useSnapshot } from 'valtio';
-import { BlockNotFound, ProviderNotDefined } from '../../errors';
-import { providerStore } from '../../stores';
+import { useClient } from '../../context';
+import { BlockNotFound } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type Block = Omit<FuelBlock, 'height'> & {
@@ -16,12 +15,12 @@ export type UseBlockConfig<T = Block> = BaseUseQueryConfig<T> & {
 export type UseBlockResult<T = Block> = BaseUseQueryResult<T>;
 
 function useBlock(config: UseBlockConfig): UseBlockResult {
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
 
   const { data, error, status, isError, isFetching, isLoading, isSuccess } = useQuery({
     queryKey: ['block', config.idOrHeight],
     queryFn: async () => {
-      if (!defaultProvider) throw ProviderNotDefined;
+      const provider = client.getDefaultProvider();
       if (!config.idOrHeight) throw BlockNotFound;
 
       let blockId = config.idOrHeight;
@@ -35,7 +34,7 @@ function useBlock(config: UseBlockConfig): UseBlockResult {
         }
       }
 
-      const block = await defaultProvider.getBlock(blockId);
+      const block = await provider.getBlock(blockId);
       if (!block) throw BlockNotFound;
       return {
         id: block.id,

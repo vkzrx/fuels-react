@@ -1,8 +1,7 @@
 import { createContext, createElement, useContext } from 'react';
 import type { PropsWithChildren } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
-import Client from './client';
-import type { ClientConfig } from './client';
+import type { Client } from './client';
 
 type ContextConfig = {
   client: Client;
@@ -22,15 +21,6 @@ function FuelProvider({ children, client }: PropsWithChildren<ContextConfig>) {
   });
 }
 
-let client: Client | null = null;
-
-function createClient(options: ClientConfig): Client {
-  if (!client) {
-    client = new Client(options);
-  }
-  return client;
-}
-
 function useClient(): Client {
   const { client } = useContext(Context);
   if (!client) {
@@ -39,4 +29,4 @@ function useClient(): Client {
   return client;
 }
 
-export { FuelProvider, createClient, useClient };
+export { useClient, FuelProvider };

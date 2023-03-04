@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address, NativeAssetId } from 'fuels';
-import { useSnapshot } from 'valtio';
-import { providerStore } from '../../stores';
-import { AddressNotCorrect, ProviderNotDefined } from '../../errors';
+import { useClient } from '../../context';
+import { AddressNotCorrect } from '../../errors';
+import useChains from '../networks/useChains';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type UseBalanceConfig = BaseUseQueryConfig<string> & {
@@ -11,16 +11,17 @@ type UseBalanceConfig = BaseUseQueryConfig<string> & {
 };
 
 function useBalance(config: UseBalanceConfig): BaseUseQueryResult<string> {
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
+  const { currentChain } = useChains();
 
   const { data, status, error, isError, isFetching, isLoading, isSuccess } = useQuery({
-    queryKey: ['balance', config.address],
+    queryKey: ['balance', config.address, currentChain?.name],
     queryFn: async () => {
-      if (!defaultProvider) throw ProviderNotDefined;
+      const provider = client.getDefaultProvider();
       if (!config.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
       const assetId = config.assetId || NativeAssetId;
-      const balance = await defaultProvider.getBalance(address, assetId);
+      const balance = await provider.getBalance(address, assetId);
       return balance.toString();
     },
     onSuccess: config.onSuccess,

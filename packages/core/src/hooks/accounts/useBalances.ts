@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Address } from 'fuels';
 import type { CoinQuantity, CursorPaginationArgs } from 'fuels';
-import { useSnapshot } from 'valtio';
-import { providerStore } from '../../stores';
-import { AddressNotCorrect, ProviderNotDefined } from '../../errors';
+import { useClient } from '../../context';
+import { AddressNotCorrect } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type CoinBalance = Omit<CoinQuantity, 'amount' | 'max'> & {
@@ -17,15 +16,15 @@ type UseBalancesConfig = BaseUseQueryConfig<CoinBalance[]> & {
 };
 
 function useBalances(config: UseBalancesConfig): BaseUseQueryResult<CoinBalance[]> {
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
 
   const { data, status, error, isError, isFetching, isLoading, isSuccess } = useQuery({
     queryKey: ['balances', config.address],
     queryFn: async () => {
-      if (!defaultProvider) throw ProviderNotDefined;
+      const provider = client.getDefaultProvider();
       if (!config.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
-      const balances = await defaultProvider.getBalances(address, config.pagination);
+      const balances = await provider.getBalances(address, config.pagination);
       return balances.map((balance) => ({
         amount: balance.amount.toString(),
         assetId: balance.assetId,

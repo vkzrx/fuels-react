@@ -9,7 +9,7 @@ const userStatusToColor: Record<UserStatus, string> = {
   connecting: 'bg-blue-500',
   disconnected: 'bg-red-500',
   disconnecting: 'bg-yellow-500',
-  locked: 'bg-purple-500',
+  loading: 'bg-purple-500',
 };
 
 function WalletSection() {
@@ -18,6 +18,7 @@ function WalletSection() {
 
   const data = useMemo<CardProps['data']>(() => {
     return [
+      { label: 'Chain', value: wallet.currentChain?.name || '' },
       { label: 'Address', value: wallet.address || '' },
       { label: 'Balance', value: balance.data || '' },
     ];

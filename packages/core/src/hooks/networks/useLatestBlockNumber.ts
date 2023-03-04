@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSnapshot } from 'valtio';
-import { ProviderNotDefined } from '../../errors';
-import { providerStore } from '../../stores';
+import { useClient } from '../../context';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type UseLatestBlockNumberConfig = BaseUseQueryConfig<string> & {
@@ -9,13 +7,13 @@ type UseLatestBlockNumberConfig = BaseUseQueryConfig<string> & {
 };
 
 function useLatestBlockNumber(config?: UseLatestBlockNumberConfig): BaseUseQueryResult<string> {
-  const { defaultProvider } = useSnapshot(providerStore);
+  const client = useClient();
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ['latestBlockNumber'],
     queryFn: async () => {
-      if (!defaultProvider) throw ProviderNotDefined;
-      const blockNumber = await defaultProvider.getBlockNumber();
+      const provider = client.getDefaultProvider();
+      const blockNumber = await provider.getBlockNumber();
       return blockNumber.toString();
     },
     onSuccess: config?.onSuccess,
