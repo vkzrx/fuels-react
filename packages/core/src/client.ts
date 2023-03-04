@@ -27,7 +27,6 @@ class Client {
 
   connector: Connector;
 
-  #provider: Fuel | undefined;
   // used to perform action where user wallet is not required
   // i.e. fetch blocks, transactions etc...
   #defaultProvider: Provider;
@@ -62,7 +61,6 @@ class Client {
   getProvider(): Fuel {
     const provider = this.connector.getProvider();
     if (!provider) throw ProviderNotDefined;
-    if (!this.#provider) this.#provider = provider;
     return provider;
   }
 
