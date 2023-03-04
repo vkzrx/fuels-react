@@ -6,12 +6,6 @@ import { store, type Chain } from '../stores';
 import { asyncFaillable } from '../utils';
 import { getClient } from '../client';
 
-function normalizeChainName(chain: FuelChainConfig): Chain['name'] {
-  if (chain.id === 'Testnet Beta 1') return 'beta-1';
-  if (chain.id === 'Testnet Beta 2') return 'beta-2';
-  return 'localhost';
-}
-
 export class InjectedConnector extends Connector<Fuel> {
   constructor() {
     super();
@@ -74,9 +68,11 @@ export class InjectedConnector extends Connector<Fuel> {
   onChainChanged(newChain: FuelChainConfig): void {
     const client = getClient();
     const chain: Chain = {
-      name: normalizeChainName(newChain),
+      name: 'localhost',
       url: newChain.url,
     };
+    if (newChain.id === '4') chain.name = 'beta-1';
+    if (newChain.id === '1') chain.name = 'beta-2';
     store.currentChain = chain;
     client.setDefaultProvider(chain);
   }

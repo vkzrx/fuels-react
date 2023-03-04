@@ -18,12 +18,10 @@ function useBalance(config: UseBalanceConfig): BaseUseQueryResult<string> {
     queryKey: ['balance', config.address, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      console.log(currentChain)
       if (!config.address) throw AddressNotCorrect;
       const address = Address.fromString(config.address);
       const assetId = config.assetId || NativeAssetId;
       const balance = await provider.getBalance(address, assetId);
-      console.log({ balance: balance.toString() })
       return balance.toString();
     },
     onSuccess: config.onSuccess,

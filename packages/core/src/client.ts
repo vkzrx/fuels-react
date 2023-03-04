@@ -45,15 +45,17 @@ class Client {
   }: ClientConfig) {
     this.queryClient = new QueryClient(queryClientConfig);
     this.connector = new InjectedConnector();
-
     this.chains = chains.map<Chain>((name) => ({ name, url: chainToURL[name] }));
 
-    // `chains` is a `NonEmptyArray`
+    // chains is a NonEmptyArray
     const currentChain = this.chains[0];
     this.#defaultProvider = new Provider(currentChain.url);
-    store.currentChain = currentChain;
 
-    this.asyncInitializeStores();
+    this.asyncInitialzeStore();
+  }
+
+  isChainConfigured(): boolean {
+    return true;
   }
 
   getProvider(): Fuel {
@@ -68,18 +70,34 @@ class Client {
   }
 
   setDefaultProvider(chain: Chain): Provider {
-    return this.#defaultProvider = new Provider(chain.url);
+    this.#defaultProvider = new Provider(chain.url);
+    return this.#defaultProvider;
   }
 
   // Used to retrieve async data
-  async asyncInitializeStores() {
+  async asyncInitialzeStore() {
     const provider = this.getProvider();
     // no provider injected
-    if (!provider) return;
-    if (!(await provider.isConnected())) return;
+    if (!provider || !(await provider.isConnected())) {
+      store.status = 'disconnected'
+      return;
+    }
 
     const currentAccount = await provider.currentAccount();
-    store.wallet = await provider.getWallet(currentAccount);
+    const wallet = await provider.getWallet(currentAccount);
+    const chain = await wallet.provider.getChain();
+
+    const currentChain: Chain = {
+      name: 'localhost',
+      url: wallet.provider.url,
+    };
+    if (chain.name === 'Testnet Beta 2') currentChain.name = 'beta-2';
+    if (chain.name === 'Testnet Beta 1') currentChain.name = 'beta-1';
+
+    store.wallet = wallet;
+    store.status = 'connected';
+    store.address = currentAccount;
+    store.currentChain = currentChain;
 
     provider.on(provider.events.currentAccount, this.connector.onAccountChanged);
     provider.on(provider.events.network, this.connector.onChainChanged);
