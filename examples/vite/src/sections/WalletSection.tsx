@@ -33,7 +33,6 @@ function WalletSection() {
           below will connect you to the beta-2 chain.
         </p>
         <p>It also keeps track of the wallet state, feel free to refresh the page.</p>
-        <p>Wallet events are not supported yet.</p>
       </div>
       <div className="flex justify-center">
         {wallet.isConnected ? (

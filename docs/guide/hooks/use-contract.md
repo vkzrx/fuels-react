@@ -16,6 +16,10 @@ With `npm`
 $ npx fuels typegen -i path/to/your/abis/*-abi.json -o output/dir
 ```
 
+:::info NOTE
+Switching chain will connect the contract instance to the new chain
+:::
+
 ## Usage
 
 ```tsx

@@ -10,10 +10,6 @@ There are currently two testnets available on Fuel, `beta-1` and `beta-2`. The m
 
 Simply specify the chains you want your app to be able to interact with.
 
-:::warning
-Wallet events are not supported yet. As a result the first chain specified, i.e. `beta-1` in the example below, will be the only one your app will connect to for now.
-:::
-
 ```ts {2}
 const client = createClient({
   chains: ['beta-1', 'beta-2'],

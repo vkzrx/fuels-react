@@ -3,7 +3,7 @@
 This section will guide you through the installation and setup of `fuels-react`. You can also try it online on [StackBlitz](https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite). It will spin up in a few seconds a Vite project with `fuels-react` already installed and set up.
 
 :::warning
-This library is currently in `pre-alpha`. It provides core features to develop on Fuel but things might change or break between a release and another.
+This library is currently in `alpha`. It provides core features to develop on Fuel but things might change or break between a release and another.
 
 It only supports `CSR` for now.
 :::
@@ -31,10 +31,6 @@ $ npm install fuels-react
 ## Setup
 
 Create a `Client` instance and pass the chains you want your app to connect to.
-
-:::warning
-Wallet events are not supported yet so switching network will not be caught
-:::
 
 ```ts
 import { createClient } from 'fuels-react';

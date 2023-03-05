@@ -8,7 +8,7 @@ A demo is available [https://fuels-react-vite.vercel.app](https://fuels-react-vi
 
 ## Documentation
 
-The documentation is available [here](https://fuels-react.com)
+The documentation is available at [fuels-react.com](https://fuels-react.com)
 
 ## Getting started
 

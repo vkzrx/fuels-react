@@ -2,6 +2,10 @@
 
 Hook for fetching an address balance for a given asset.
 
+:::info NOTE
+It automatically refetches the balances whenever the address changes or the user switches chain
+:::
+
 ## Usage
 
 ```tsx

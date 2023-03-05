@@ -2,6 +2,10 @@
 
 Hook for fetching a given block.
 
+:::info NOTE
+It automatically refetches the block whenever `idOrHeight` changes or the user switches chain
+:::
+
 ## Usage
 
 ```tsx

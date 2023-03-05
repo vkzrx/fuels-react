@@ -66,15 +66,11 @@ function App() {
 
 ## Return Type
 
-:::warning
-Wallet events are not supported yet so `locked` status is not supported.
-:::
-
 ```ts
 type UseDisconnectResult = {
   disconnect: () => void;
   disconnectAsync: () => Promise<void>;
-  status: 'connected' | 'connecting' | 'disconnected' | 'disconnecting' | 'locked';
+  status: 'connected' | 'connecting' | 'disconnected' | 'disconnecting' | 'loading';
   error: unknown;
   isError: boolean;
   isFetching: boolean;

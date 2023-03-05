@@ -2,10 +2,6 @@
 
 Hook for getting the Fuel provider and the chains your app is configured to connect to.
 
-:::warning
-Wallet events are not supported yet so the `provider` will always be connected to the first chain you passed to your client.
-:::
-
 ## Usage
 
 ```tsx

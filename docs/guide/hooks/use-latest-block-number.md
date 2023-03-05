@@ -2,6 +2,10 @@
 
 Hook for fetching the latest block number.
 
+:::info NOTE
+Switching chain will make this hook refetch the latest block number of the new chain
+:::
+
 ## Usage
 
 ```tsx

@@ -2,6 +2,10 @@
 
 Hook for fetching all messages of an address.
 
+:::info NOTE
+It automatically refetches the messages whenever the address changes or the user switches chain
+:::
+
 ## Usage
 
 ```tsx

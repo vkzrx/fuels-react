@@ -2,6 +2,10 @@
 
 Hook for fetching the list of coins for an address.
 
+:::info NOTE
+It automatically refetches the coins whenever the address changes or the user switches chain
+:::
+
 ## Usage
 
 ```tsx

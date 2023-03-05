@@ -2,10 +2,6 @@
 
 Hook for getting the current chain your app is connect to and all configured chains.
 
-:::warning
-Wallet events are not supported yet so switching networks will not be caught
-:::
-
 ## Usage
 
 ```tsx
