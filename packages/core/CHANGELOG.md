@@ -1,5 +1,37 @@
 # fuels-react
 
+## 0.3.0
+
+### Minor Changes
+
+- 8e5dbff: feat: Listen wallet events
+
+### Patch Changes
+
+- 8e5dbff: fix: async provider injection
+- fadf1de: fix: Make hooks re-run on network changes
+
+  - useBalance()
+  - useBalances()
+  - useCoins()
+  - useMessages()
+  - useContract()
+  - useBlock()
+  - useBlockWithTransactions()
+  - useLatestBlockNumber()
+  - useTransaction()
+  - useTransactionCost()
+
+- 0ad4b5c: chore: remove unused provider
+- 296a482: fix: make `queries` re-run on parameter changes
+
+  - useBalance()
+  - useBalances()
+  - useCoins()
+  - useMessages()
+  - useBlockWithTransactions()
+  - useTransactionCost()
+
 ## 0.2.2
 
 ### Patch Changes
