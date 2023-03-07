@@ -3,7 +3,7 @@ import type { Provider, TransactionRequestLike } from 'fuels';
 import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { TransactionRequestNotCorrect } from '../../errors';
-import { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
+import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
 type TransactionCostResponse = Awaited<ReturnType<Provider['getTransactionCost']>>;
 

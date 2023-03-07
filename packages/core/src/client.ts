@@ -7,7 +7,7 @@ import type { Chain } from './stores';
 import type { NonEmptyArray } from './types';
 import { InjectedConnector } from './connectors/injected';
 import { ChainNotConfigured, ClientNotDefined, ProviderNotDefined } from './errors';
-import { Connector } from './connectors/base';
+import type { Connector } from './connectors/base';
 import { wait } from './utils';
 
 export type ClientConfig = {

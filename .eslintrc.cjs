@@ -12,6 +12,7 @@ module.exports = defineConfig({
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/prefer-ts-expect-error': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
   },
   ignorePatterns: ['CHANGELOG.md', 'dist', 'node_modules', '**/*.config.cjs'],
 });
