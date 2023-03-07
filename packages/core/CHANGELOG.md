@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.1
+
+### Patch Changes
+
+- 4612c5e: fix: throw instances of custom error classes
+
 ## 0.3.0
 
 ### Minor Changes
