@@ -22,7 +22,7 @@ function useTransactionCost(
     queryKey: ['transactionCost', config.transactionRequest, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.transactionRequest) throw TransactionRequestNotCorrect;
+      if (!config.transactionRequest) throw new TransactionRequestNotCorrect();
       const transactionCost = await provider.getTransactionCost(
         config.transactionRequest,
         config.tolerance,

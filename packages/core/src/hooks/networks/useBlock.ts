@@ -23,7 +23,7 @@ function useBlock(config: UseBlockConfig): UseBlockResult {
     queryKey: ['block', config.idOrHeight, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.idOrHeight) throw BlockNotFound;
+      if (!config.idOrHeight) throw new BlockNotFound();
 
       let blockId = config.idOrHeight;
 
@@ -37,7 +37,7 @@ function useBlock(config: UseBlockConfig): UseBlockResult {
       }
 
       const block = await provider.getBlock(blockId);
-      if (!block) throw BlockNotFound;
+      if (!block) throw new BlockNotFound();
       return {
         id: block.id,
         height: block.height.toString(),

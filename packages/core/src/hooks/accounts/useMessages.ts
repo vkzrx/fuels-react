@@ -20,7 +20,7 @@ function useMessages(config: UseMessagesConfig): BaseUseQueryResult<Message[]> {
     queryKey: ['messages', config.address, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.address) throw AddressNotCorrect;
+      if (!config.address) throw new AddressNotCorrect();
       const address = Address.fromString(config.address);
       const messages = await provider.getMessages(address, config.pagination);
       return messages;

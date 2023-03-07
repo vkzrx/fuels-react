@@ -19,8 +19,8 @@ function useSignMessage(config: UseMessageConfig): UseSignMessageResult {
   const signMessageMutation = useMutation({
     mutationKey: ['signMessage'],
     mutationFn: async () => {
-      if (!store.wallet) throw UserWalletNotDefined;
-      if (!config.message) throw MessageNotCorrect;
+      if (!store.wallet) throw new UserWalletNotDefined();
+      if (!config.message) throw new MessageNotCorrect();
       return store.wallet.signMessage(config.message);
     },
     onSuccess: config?.onSuccess,

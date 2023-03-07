@@ -20,7 +20,7 @@ function useCoins(config: UseCoinsConfig): BaseUseQueryResult<Coin[]> {
     queryKey: ['coins', config.address, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.address) throw AddressNotCorrect;
+      if (!config.address) throw new AddressNotCorrect();
       const address = Address.fromString(config.address);
       const coins = await provider.getCoins(address, config.assetId, config.pagination);
       return coins;

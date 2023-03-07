@@ -24,7 +24,7 @@ function useBalances(config: UseBalancesConfig): BaseUseQueryResult<CoinBalance[
     queryKey: ['balances', config.address, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.address) throw AddressNotCorrect;
+      if (!config.address) throw new AddressNotCorrect();
       const address = Address.fromString(config.address);
       const balances = await provider.getBalances(address, config.pagination);
       return balances.map((balance) => ({

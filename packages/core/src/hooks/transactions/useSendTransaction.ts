@@ -21,8 +21,8 @@ function useSendTransaction(config?: UseSendTransactionConfig): UseSendTransacti
   const transferMutation = useMutation({
     mutationKey: ['sendTransaction'],
     mutationFn: async () => {
-      if (!store.wallet) throw UserWalletNotDefined;
-      if (!config?.request) throw TransactionRequestNotCorrect;
+      if (!store.wallet) throw new UserWalletNotDefined();
+      if (!config?.request) throw new TransactionRequestNotCorrect();
 
       const { request } = config;
       const transaction: TransactionRequestLike = {

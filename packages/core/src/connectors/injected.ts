@@ -37,8 +37,8 @@ export class InjectedConnector extends Connector<Fuel> {
 
   async connect(): Promise<void> {
     const provider = this.getProvider();
-    if (!provider) throw ProviderNotDefined;
-    if (store.status === 'connected') throw UserAlreadyConnected;
+    if (!provider) throw new ProviderNotDefined();
+    if (store.status === 'connected') throw new UserAlreadyConnected();
 
     store.status = 'connecting';
 
@@ -60,8 +60,8 @@ export class InjectedConnector extends Connector<Fuel> {
 
   async disconnect(): Promise<void> {
     const provider = this.getProvider();
-    if (!provider) throw ProviderNotDefined;
-    if (store.status === 'disconnected') throw UserAlreadyDisconnected;
+    if (!provider) throw new ProviderNotDefined();
+    if (store.status === 'disconnected') throw new UserAlreadyDisconnected();
 
     store.status = 'disconnecting';
 
@@ -94,7 +94,7 @@ export class InjectedConnector extends Connector<Fuel> {
     if (newChain.id === '4') chain.name = 'beta-1';
     if (newChain.id === '1') chain.name = 'beta-2';
     if (!client.isChainConfigured(chain.name)) {
-      throw ChainNotConfigured;
+      throw new ChainNotConfigured();
     }
     store.currentChain = chain;
     client.setDefaultProvider(chain);

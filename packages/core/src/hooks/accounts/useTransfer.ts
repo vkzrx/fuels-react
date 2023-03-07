@@ -34,7 +34,7 @@ function useTransfer(config?: UseTransferConfig): UseTransferResult {
   const transferMutation = useMutation({
     mutationKey: ['transfer'],
     mutationFn: async (params) => {
-      if (!store.wallet) throw UserWalletNotDefined;
+      if (!store.wallet) throw new UserWalletNotDefined();
       const { destination, amount, assetId, transactionParams } = params;
       return store.wallet.transfer(destination, amount, assetId, transactionParams);
     },

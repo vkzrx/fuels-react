@@ -60,7 +60,7 @@ class Client {
 
   getProvider(): Fuel {
     const provider = this.connector.getProvider();
-    if (!provider) throw ProviderNotDefined;
+    if (!provider) throw new ProviderNotDefined();
     return provider;
   }
 
@@ -103,7 +103,7 @@ class Client {
     if (chain.name === 'Testnet Beta 1') currentChain.name = 'beta-1';
 
     if (!this.isChainConfigured(currentChain.name)) {
-      throw ChainNotConfigured;
+      throw new ChainNotConfigured();
     }
 
     store.wallet = wallet;
@@ -126,7 +126,7 @@ function createClient(options: ClientConfig): Client {
 }
 
 function getClient(): Client {
-  if (!client) throw ClientNotDefined;
+  if (!client) throw new ClientNotDefined();
   return client;
 }
 

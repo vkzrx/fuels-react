@@ -22,7 +22,7 @@ function useBlockWithTransactions(
     queryKey: ['blockWithTransactions', config.idOrHeight, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.idOrHeight) throw BlockNotFound;
+      if (!config.idOrHeight) throw new BlockNotFound();
 
       let blockId = config.idOrHeight;
 
@@ -36,7 +36,7 @@ function useBlockWithTransactions(
       }
 
       const block = await provider.getBlockWithTransactions(blockId);
-      if (!block) throw BlockNotFound;
+      if (!block) throw new BlockNotFound();
       return {
         id: block.id,
         height: block.height.toString(),

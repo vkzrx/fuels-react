@@ -21,9 +21,9 @@ function useTransaction(config: UseTransactionConfig): UseTransactionResult {
     queryKey: ['transaction', config.transactionId, currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
-      if (!config.transactionId) throw TransactionIDNotCorrect;
+      if (!config.transactionId) throw new TransactionIDNotCorrect();
       const transaction = await provider.getTransaction(config.transactionId);
-      if (!transaction) throw TransactionNotFound;
+      if (!transaction) throw new TransactionNotFound();
       return transaction;
     },
     onSuccess: config.onSuccess,
