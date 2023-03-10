@@ -41,7 +41,7 @@ function useBlockWithTransactions(
         id: block.id,
         height: block.height.toString(),
         time: block.time,
-        transactionId: block.transactionIds,
+        transactionIds: block.transactionIds,
         transactions: block.transactions,
       };
     },
