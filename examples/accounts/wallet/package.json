@@ -1,5 +1,5 @@
 {
-  "name": "@examples/wallet-connection",
+  "name": "@examples/wallet",
   "private": true,
   "version": "0.0.0",
   "type": "module",
