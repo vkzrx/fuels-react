@@ -12,12 +12,14 @@ function App() {
     transactionId: '0x3123ef57e04cfb69cd5bcede64ccbfe8f960befd1d6c230acc7cf84a34fe0652',
   });
   if (transaction.isLoading) return <div>Fetching transaction...</div>;
-  if (transaction.isError) return <div>Fetching transaction has failed</div>;
+  if (transaction.data) return <div>Transaction not found</div>;
   return (
-    <>
-      <div>Transaction ID: {transaction.data.id}</div>
-      <div>Transaction type: {transaction.data.type}</div>
-    </>
+    <div>
+      Transaction:
+      <pre>
+        <code>{JSON.stringify(transaction.data, null, 2)}</code>
+      </pre>
+    </div>
   );
 }
 ```
@@ -99,3 +101,7 @@ type UseTransactionResult = {
   isSuccess: boolean;
 };
 ```
+
+## Example
+
+<iframe frameborder="0" width="100%" height="500px" src="https://stackblitz.com/github/0xYami/fuels-react/blob/main/examples/transactions/transaction?embed=1&file=src/App.tsx&hideNavigation=1&hideDevTools=true&terminalHeight=0&ctl=1"></iframe>
