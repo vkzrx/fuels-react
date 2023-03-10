@@ -196,6 +196,29 @@ importers:
       typescript: 4.9.5
       vite: 3.2.5
 
+  examples/contracts/contract:
+    specifiers:
+      '@types/react': ^18.0.28
+      '@types/react-dom': ^18.0.11
+      '@vitejs/plugin-react': ^2.2.0
+      fuels: ^0.31.0
+      fuels-react: latest
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      typescript: ^4.9.5
+      vite: ^3.2.5
+    dependencies:
+      fuels: 0.31.0
+      fuels-react: link:../../../packages/core
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@vitejs/plugin-react': 2.2.0_vite@3.2.5
+      typescript: 4.9.5
+      vite: 3.2.5
+
   examples/networks/block:
     specifiers:
       '@types/react': ^18.0.28
