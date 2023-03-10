@@ -1,10 +1,3 @@
-# useChains
-
-Hook for getting the current chain your app is connect to and all configured chains.
-
-## Usage
-
-```tsx
 import { useChains } from 'fuels-react';
 
 function App() {
@@ -24,18 +17,6 @@ function App() {
     </>
   );
 }
-```
 
-## Return Type
 
-```ts
-type Chain = {
-  name: string;
-  url: string;
-};
-
-type UseChainsResult = {
-  currentChain: Chain | null;
-  chains: Chain[] | null;
-};
-```
+export default App;
