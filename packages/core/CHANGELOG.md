@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.2
+
+### Patch Changes
+
+- 3c57001: fix: export `useBalances`
+
 ## 0.3.1
 
 ### Patch Changes
