@@ -13,7 +13,7 @@ function App() {
     <>
       <div>Current chain URL: {provider.url}</div>
       <h2>Configured chains</h2>
-      {chains.map((chain) => (
+      {chains?.map((chain) => (
         <div key={chain.name}>
           <div>Name: {chain.name}</div>
           <div>URL: {chain.url}</div>
