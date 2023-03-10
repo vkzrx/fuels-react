@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.3
+
+### Patch Changes
+
+- 42faf23: fix: typo in `useBlockWithTransactions()`
+
 ## 0.3.2
 
 ### Patch Changes
