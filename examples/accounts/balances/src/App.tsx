@@ -11,7 +11,7 @@ function App() {
     <>
       <div>Assets</div>
       {balances.data?.map(balance => (
-        <div key={balance.assetId} style={{ paddingTop: '10px' }}>
+        <div key={balance.assetId} style={{ marginTop: '10px' }}>
           <div>Asset id: {balance.assetId}</div>
           <div>Amount: {balance.amount}</div>
           {balance.max ? (
