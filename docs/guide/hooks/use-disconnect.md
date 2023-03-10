@@ -8,7 +8,7 @@ Hook for disconnecting the user wallet from your app.
 import { useDisconnect } from 'fuels-react';
 
 function App() {
-  const { status, error, connect, isConnected } = useDisconnect();
+  const { status, error, disconnect, isConnected } = useDisconnect();
   if (!isConnected) return <div>Already disconnected</div>;
   return (
     <>
@@ -78,3 +78,7 @@ type UseDisconnectResult = {
   isSuccess: boolean;
 };
 ```
+
+## Example
+
+<iframe frameborder="0" width="100%" height="500px" src="https://stackblitz.com/github/0xYami/fuels-react/blob/main/examples/accounts/disconnect?embed=1&file=src/App.tsx&hideNavigation=1&hideDevTools=true&terminalHeight=0&ctl=1"></iframe>
