@@ -21,10 +21,10 @@ function App() {
   return (
     <>
       <div>Status: {block.status}</div>
-      <div>Block height: {block.data.height}</div>
-      <div>Block time: {block.data.time}</div>
-      <div>Block ID: {block.data.id}</div>
-      <div>Total transactions: {block.data.transactionIds.length}</div>
+      <div>Block height: {block.data?.height}</div>
+      <div>Block time: {block.data?.time}</div>
+      <div>Block ID: {block.data?.id}</div>
+      <div>Total transactions: {block.data?.transactionIds.length}</div>
     </>
   );
 }
@@ -114,3 +114,7 @@ type UseBlockResult = {
   isSuccess: boolean;
 };
 ```
+
+## Example
+
+<iframe frameborder="0" width="100%" height="500px" src="https://stackblitz.com/github/0xYami/fuels-react/tree/main/examples/networks/block?embed=1&file=src/App.tsx&hideNavigation=1&hideDevTools=true&terminalHeight=0&ctl=1"></iframe>

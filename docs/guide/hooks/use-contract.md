@@ -39,7 +39,7 @@ function App() {
     if (!contract) return;
     (async () => {
       const counter = await contract.functions.counter().get();
-      setCounter(counter);
+      setCounter(counter.value.toNumber());
     })();
   }, [contract]);
 
@@ -135,3 +135,7 @@ function App() {
 ```ts
 type UseContractResult<T extends Contract> = T | null;
 ```
+
+## Example
+
+<iframe frameborder="0" width="100%" height="500px" src="https://stackblitz.com/github/0xYami/fuels-react/tree/main/examples/contracts/contract?embed=1&file=src/App.tsx&hideNavigation=1&hideDevTools=true&terminalHeight=0&ctl=1"></iframe>
