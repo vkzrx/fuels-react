@@ -39,3 +39,7 @@ type UseChainsResult = {
   chains: Chain[] | null;
 };
 ```
+
+## Example
+
+<iframe frameborder="0" width="100%" height="500px" src="https://stackblitz.com/github/0xYami/fuels-react/blob/main/examples/networks/chains?embed=1&file=src/App.tsx&hideNavigation=1&hideDevTools=true&terminalHeight=0&ctl=1"></iframe>
