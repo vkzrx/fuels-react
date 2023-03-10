@@ -21,10 +21,10 @@ function App() {
   return (
     <>
       <div>Status: {block.status}</div>
-      <div>Block height: {block.data.height}</div>
-      <div>Block time: {block.data.time}</div>
-      <div>Block ID: {block.data.id}</div>
-      <div>Total transactions: {block.data.transactionIds.length}</div>
+      <div>Block height: {block.data?.height}</div>
+      <div>Block time: {block.data?.time}</div>
+      <div>Block ID: {block.data?.id}</div>
+      <div>Total transactions: {block.data?.transactionIds.length}</div>
     </>
   );
 }
