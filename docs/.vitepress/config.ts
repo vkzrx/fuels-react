@@ -64,6 +64,7 @@ export default defineConfig({
               { text: 'useBalance', link: '/guide/hooks/use-balance' },
               { text: 'useBalances', link: '/guide/hooks/use-balances' },
               { text: 'useBlock', link: '/guide/hooks/use-block' },
+              { text: 'useBlockNumber', link: '/guide/hooks/use-block-number' },
               {
                 text: 'useBlockWithTransactions',
                 link: '/guide/hooks/use-block-with-transactions',
@@ -73,7 +74,6 @@ export default defineConfig({
               { text: 'useConnect', link: '/guide/hooks/use-connect' },
               { text: 'useContract', link: '/guide/hooks/use-contract' },
               { text: 'useDisconnect', link: '/guide/hooks/use-disconnect' },
-              { text: 'useLatestBlockNumber', link: '/guide/hooks/use-latest-block-number' },
               { text: 'useMessages', link: '/guide/hooks/use-messages' },
               { text: 'useProvider', link: '/guide/hooks/use-provider' },
               { text: 'useSignMessage', link: '/guide/hooks/use-sign-message' },
