@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.6
+
+### Patch Changes
+
+- 54a5d62: feat: add `beta-3` network support
+
 ## 0.3.5
 
 ### Patch Changes

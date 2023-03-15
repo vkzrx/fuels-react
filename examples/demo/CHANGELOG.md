@@ -1,5 +1,12 @@
 # @examples/vite
 
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies [54a5d62]
+  - fuels-react@0.3.6
+
 ## 0.1.5
 
 ### Patch Changes
