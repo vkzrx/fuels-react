@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.5
+
+### Patch Changes
+
+- acc74ac: bump fuels `^0.31.0` -> `^0.35.0`
+
 ## 0.3.4
 
 ### Patch Changes
