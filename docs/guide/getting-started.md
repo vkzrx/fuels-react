@@ -4,8 +4,6 @@ This section will guide you through the installation and setup of `fuels-react`.
 
 :::warning
 This library is currently in `alpha`. It provides core features to develop on Fuel but things might change or break between a release and another.
-
-It only supports `CSR` for now.
 :::
 
 ## Installation

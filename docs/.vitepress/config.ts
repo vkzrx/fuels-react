@@ -35,8 +35,17 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/getting-started', activeMatch: '/guide/' },
       { text: 'Cookbook', link: '/cookbook/recipes', activeMatch: '/cookbook/' },
       {
-        text: 'Playground',
-        link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite',
+        text: 'Playgrounds',
+        items: [
+          {
+            text: 'Vite',
+            link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite',
+          },
+          {
+            text: 'Next',
+            link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/next',
+          },
+        ],
       },
       {
         text: `v${version}`,

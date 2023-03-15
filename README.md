@@ -2,8 +2,6 @@
 
 This repository is at its early stage so things might not work as expected.
 
-Note it's been tested only with a `CSR` app.
-
 A demo is available [https://fuels-react-vite.vercel.app](https://fuels-react-vite.vercel.app/)
 
 ## Documentation
