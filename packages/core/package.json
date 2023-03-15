@@ -35,11 +35,11 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@fuel-wallet/sdk": "^0.6.0",
+    "@fuel-wallet/sdk": "^0.7.0",
     "@tanstack/react-query": "^4.24.9",
     "dexie": "^3.2.3",
     "dexie-observable": "4.0.1-beta.13",
-    "fuels": "^0.31.0",
+    "fuels": "^0.35.0",
     "react": "^18.2.0",
     "valtio": "^1.10.2"
   },

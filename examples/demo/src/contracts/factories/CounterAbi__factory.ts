@@ -4,13 +4,13 @@
 /* eslint-disable */
 
 /*
-  Fuels version: 0.31.0
-  Forc version: 0.32.2
-  Fuel-Core version: 0.17.1
+  Fuels version: 0.35.0
+  Forc version: 0.35.3
+  Fuel-Core version: 0.17.3
 */
 
 import { Interface, Contract } from 'fuels';
-import type { Provider, BaseWalletLocked, AbstractAddress } from 'fuels';
+import type { Provider, Account, AbstractAddress } from 'fuels';
 import type { CounterAbi, CounterAbiInterface } from '../CounterAbi';
 
 const _abi = {
@@ -85,10 +85,7 @@ export class CounterAbi__factory {
   static createInterface(): CounterAbiInterface {
     return new Interface(_abi) as unknown as CounterAbiInterface;
   }
-  static connect(
-    id: string | AbstractAddress,
-    walletOrProvider: BaseWalletLocked | Provider,
-  ): CounterAbi {
-    return new Contract(id, _abi, walletOrProvider) as unknown as CounterAbi;
+  static connect(id: string | AbstractAddress, accountOrProvider: Account | Provider): CounterAbi {
+    return new Contract(id, _abi, accountOrProvider) as unknown as CounterAbi;
   }
 }

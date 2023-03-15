@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Contract } from 'fuels';
-import type { AbstractAddress, BaseWalletLocked, Interface, JsonAbi, Provider } from 'fuels';
+import type { AbstractAddress, BaseWalletUnlocked, Interface, JsonAbi, Provider } from 'fuels';
+import type { FuelWalletLocked } from '@fuel-wallet/sdk';
 import { subscribe } from 'valtio';
 import useChains from '../networks/useChains';
 import { useClient } from '../../context';
@@ -9,7 +10,7 @@ import { store } from '../../stores';
 type UseContractConfig = {
   address: string | AbstractAddress;
   abi: JsonAbi | Interface;
-  signerOrProvider?: BaseWalletLocked | Provider;
+  signerOrProvider?: BaseWalletUnlocked | Provider;
 };
 
 function useContract<T extends Contract>(config: UseContractConfig): T | null {
@@ -24,7 +25,7 @@ function useContract<T extends Contract>(config: UseContractConfig): T | null {
     const callback = () => {
       const defaultProvider = client.getDefaultProvider();
 
-      let walletOrProvider: BaseWalletLocked | Provider = defaultProvider;
+      let walletOrProvider: BaseWalletUnlocked | FuelWalletLocked | Provider = defaultProvider;
 
       if (signerOrProvider) {
         walletOrProvider = signerOrProvider;
