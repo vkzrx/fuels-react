@@ -10,14 +10,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: 'Build, Lint & Tests: node-${{ matrix.node_version }}, ${{ matrix.os }}'
+  install:
+    name: Install
     timeout-minutes: 10
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node_version: [16]
+        node-version: [16, 18]
+        pnpm-version: [7.25]
       fail-fast: false
 
     steps:
@@ -27,25 +27,198 @@ jobs:
           fetch-depth: 2
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: ${{ matrix.pnpm-version }}
 
-      - name: Set node version to ${{ matrix.node_version }}
+      - name: Set node version to ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - name: Install dependencies
+      - name: Cache pnpm
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: |
+            node_modules
+            packages/**/node_modules
+            packages/**/dist
+            examples/**/node_modules
+            playgrounds/**/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: pnpm install
+
+  format:
+    name: Format
+    needs: install
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [18]
+        pnpm-version: [7.25]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: ${{ matrix.pnpm-version }}
+
+      - name: Set node version to ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/**/node_modules
+            packages/**/dist
+            examples/**/node_modules
+            playgrounds/**/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Format
         run: pnpm format:check
 
+  lint:
+    name: Lint
+    needs: install
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [16, 18]
+        pnpm-version: [7.25]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: ${{ matrix.pnpm-version }}
+
+      - name: Set node version to ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/**/node_modules
+            packages/**/dist
+            examples/**/node_modules
+            playgrounds/**/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+
       - name: Lint
         run: pnpm lint
 
+  typecheck:
+    name: Typecheck
+    needs: install
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [16, 18]
+        pnpm-version: [7.25]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: ${{ matrix.pnpm-version }}
+
+      - name: Set node version to ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/**/node_modules
+            packages/**/dist
+            examples/**/node_modules
+            playgrounds/**/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+
       - name: Typecheck
         run: pnpm typecheck
+
+  build:
+    name: Build
+    needs: install
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [16, 18]
+        pnpm-version: [7.25]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: ${{ matrix.pnpm-version }}
+
+      - name: Set node version to ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/**/node_modules
+            packages/**/dist
+            examples/**/node_modules
+            playgrounds/**/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Build
         run: pnpm build
