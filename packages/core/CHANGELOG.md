@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.4
+
+### Patch Changes
+
+- 2e11d2e: Rename `useLatestBlockNumber()` -> `useBlockNumber()`
+
 ## 0.3.3
 
 ### Patch Changes
