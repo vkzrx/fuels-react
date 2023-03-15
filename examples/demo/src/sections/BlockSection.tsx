@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useBlock, useLatestBlockNumber } from 'fuels-react';
+import { useBlock, useBlockNumber } from 'fuels-react';
 import * as Switch from '@radix-ui/react-switch';
 import Card from '../components/Card';
 import type { CardProps } from '../components/Card';
@@ -7,19 +7,19 @@ import { clsx } from 'clsx';
 
 function BlockSection() {
   const [autoRefetch, setAutoRefetch] = useState(false);
-  const latestBlockNumber = useLatestBlockNumber({
+  const blockNumber = useBlockNumber({
     refetchInterval: autoRefetch ? 1000 : undefined,
   });
-  const block = useBlock({ idOrHeight: latestBlockNumber.data || null });
+  const block = useBlock({ idOrHeight: blockNumber.data || null });
 
   const blockData = useMemo<CardProps['data']>(() => {
     return [
-      { label: 'Fetching', value: latestBlockNumber.isFetching ? 'True' : 'False' },
+      { label: 'Fetching', value: blockNumber.isFetching ? 'True' : 'False' },
       { label: 'Number', value: block.data?.height.toString() || '' },
       { label: 'Hash', value: block.data?.id || '' },
       { label: 'Transactions', value: block.data?.transactionIds.length || '' },
     ];
-  }, [latestBlockNumber.isFetching, block.data]);
+  }, [blockNumber.isFetching, block.data]);
 
   return (
     <div>

@@ -3,16 +3,16 @@ import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
 
-type UseLatestBlockNumberConfig = BaseUseQueryConfig<string> & {
+type UseBlockNumberConfig = BaseUseQueryConfig<string> & {
   refetchInterval?: number | false;
 };
 
-function useLatestBlockNumber(config?: UseLatestBlockNumberConfig): BaseUseQueryResult<string> {
+function useBlockNumber(config?: UseBlockNumberConfig): BaseUseQueryResult<string> {
   const client = useClient();
   const { currentChain } = useChains();
 
   const { data, status, error, isError, isLoading, isFetching, isSuccess } = useQuery({
-    queryKey: ['latestBlockNumber', currentChain?.name],
+    queryKey: ['blockNumber', currentChain?.name],
     queryFn: async () => {
       const provider = client.getDefaultProvider();
       const blockNumber = await provider.getBlockNumber();
@@ -34,4 +34,4 @@ function useLatestBlockNumber(config?: UseLatestBlockNumberConfig): BaseUseQuery
   };
 }
 
-export default useLatestBlockNumber;
+export default useBlockNumber;

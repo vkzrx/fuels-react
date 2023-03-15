@@ -1,7 +1,7 @@
-import { useLatestBlockNumber } from 'fuels-react';
+import { useBlockNumber } from 'fuels-react';
 
 function App() {
-  const blockNumber = useLatestBlockNumber();
+  const blockNumber = useBlockNumber();
   if (blockNumber.isLoading) return <div>Fetching block number...</div>;
   if (blockNumber.isError) return <div>Fetching block number has failed</div>;
   return (
