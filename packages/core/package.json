@@ -31,7 +31,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "pnpm typecheck && tsup",
+    "typecheck": "tsc --noEmit",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
