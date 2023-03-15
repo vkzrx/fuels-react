@@ -18,6 +18,7 @@ export type ClientConfig = {
 const chainToURL: Record<Chain['name'], string> = {
   'beta-1': 'https://node-beta-1.fuel.network/graphql',
   'beta-2': 'https://node-beta-2.fuel.network/graphql',
+  'beta-3': 'https://beta-3.fuel.network/graphql',
   localhost: 'http://127.0.0.1:4000/graphql',
 };
 
@@ -99,6 +100,7 @@ class Client {
       name: 'localhost',
       url: wallet.provider.url,
     };
+    if (chain.name === 'Testnet Beta 3') currentChain.name = 'beta-3';
     if (chain.name === 'Testnet Beta 2') currentChain.name = 'beta-2';
     if (chain.name === 'Testnet Beta 1') currentChain.name = 'beta-1';
 

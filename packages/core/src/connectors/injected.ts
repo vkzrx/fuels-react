@@ -92,7 +92,8 @@ export class InjectedConnector extends Connector<Fuel> {
       url: newChain.url,
     };
     if (newChain.id === '4') chain.name = 'beta-1';
-    if (newChain.id === '1') chain.name = 'beta-2';
+    if (newChain.id === '2') chain.name = 'beta-2';
+    if (newChain.id === '1') chain.name = 'beta-3';
     if (!client.isChainConfigured(chain.name)) {
       throw new ChainNotConfigured();
     }
