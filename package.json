@@ -20,7 +20,8 @@
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
-    "test": "turbo run test",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "turbo run typecheck",
     "lint": "eslint . --cache",
     "lint:fix": "pnpm lint --fix",
@@ -43,10 +44,13 @@
     "eslint-define-config": "^1.15.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
+    "jsdom": "^21.1.1",
     "prettier": "^2.8.4",
     "turbo": "^1.8.0",
     "typescript": "^4.9.5",
-    "vitepress": "1.0.0-alpha.48"
+    "vite": "^4.2.0",
+    "vitepress": "1.0.0-alpha.48",
+    "vitest": "^0.29.3"
   },
   "engines": {
     "node": ">=16.0.0"
