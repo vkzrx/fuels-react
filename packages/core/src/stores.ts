@@ -7,7 +7,7 @@ export type Chain = {
   url: string;
 };
 
-export type UserStatus = 'connected' | 'connecting' | 'disconnected' | 'disconnecting' | 'loading';
+export type UserStatus = 'connected' | 'connecting' | 'disconnected' | 'disconnecting';
 
 export type StoreState = {
   address: string | null;
@@ -20,7 +20,7 @@ export const store = proxy<StoreState>({
   address: null,
   wallet: null,
   currentChain: null,
-  status: 'loading',
+  status: 'disconnected',
 });
 
 export const connect = async () => {
