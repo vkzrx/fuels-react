@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18]
         pnpm-version: [7.25]
       fail-fast: false
 
@@ -111,7 +111,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18]
         pnpm-version: [7.25]
       fail-fast: false
 
@@ -154,7 +154,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18]
         pnpm-version: [7.25]
       fail-fast: false
 
@@ -197,7 +197,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18]
         pnpm-version: [7.25]
       fail-fast: false
 
