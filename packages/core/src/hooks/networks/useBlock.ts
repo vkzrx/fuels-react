@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Block as FuelBlock } from 'fuels';
-import useChains from './useChains';
 import { useClient } from '../../context';
 import { BlockNotFound } from '../../errors';
 import type { BaseUseQueryConfig, BaseUseQueryResult } from '../../types';
+import useChains from './useChains';
 
 type Block = Omit<FuelBlock, 'height'> & {
   height: string;

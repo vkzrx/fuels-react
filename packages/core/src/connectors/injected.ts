@@ -1,5 +1,4 @@
 import type { Fuel } from '@fuel-wallet/sdk';
-import { Connector, type FuelChainConfig } from './base';
 import { IS_BROWSER } from '../constants';
 import {
   ChainNotConfigured,
@@ -10,6 +9,7 @@ import {
 import { store, type Chain } from '../stores';
 import { asyncFaillable } from '../utils';
 import { getClient } from '../client';
+import { Connector, type FuelChainConfig } from './base';
 
 export class InjectedConnector extends Connector<Fuel> {
   #provider: Fuel | undefined;

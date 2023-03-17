@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Provider } from 'fuels';
-import type { UseBlockConfig, UseBlockResult } from './useBlock';
-import useChains from './useChains';
 import { useClient } from '../../context';
 import { BlockNotFound } from '../../errors';
+import type { UseBlockConfig, UseBlockResult } from './useBlock';
+import useChains from './useChains';
 
 type BlockWithTransactions = Omit<
   NonNullable<Awaited<ReturnType<Provider['getBlockWithTransactions']>>>,

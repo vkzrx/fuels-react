@@ -52,7 +52,9 @@ jobs:
             packages/**/node_modules
             packages/**/dist
             examples/**/node_modules
+            examples/**/dist
             playgrounds/**/node_modules
+            playgrounds/**/dist
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Dependencies
@@ -94,7 +96,9 @@ jobs:
             packages/**/node_modules
             packages/**/dist
             examples/**/node_modules
+            examples/**/dist
             playgrounds/**/node_modules
+            playgrounds/**/dist
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Format
@@ -135,7 +139,9 @@ jobs:
             packages/**/node_modules
             packages/**/dist
             examples/**/node_modules
+            examples/**/dist
             playgrounds/**/node_modules
+            playgrounds/**/dist
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Lint
@@ -176,7 +182,9 @@ jobs:
             packages/**/node_modules
             packages/**/dist
             examples/**/node_modules
+            examples/**/dist
             playgrounds/**/node_modules
+            playgrounds/**/dist
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Typecheck
@@ -217,7 +225,9 @@ jobs:
             packages/**/node_modules
             packages/**/dist
             examples/**/node_modules
+            examples/**/dist
             playgrounds/**/node_modules
+            playgrounds/**/dist
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Build

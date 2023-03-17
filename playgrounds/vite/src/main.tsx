@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
 import { createClient, FuelProvider } from 'fuels-react';
+import App from './App';
 import './index.css';
 
 const client = createClient({ chains: ['beta-2'] });

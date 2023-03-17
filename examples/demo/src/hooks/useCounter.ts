@@ -1,7 +1,6 @@
-import { useQuery, useQueryClient, useMutation } from 'fuels-react';
-import { useContract } from 'fuels-react';
+import { useContract, useQuery, useQueryClient, useMutation } from 'fuels-react';
 import type { CounterAbi } from '../contracts';
-import abi from '../contracts/Counter-abi.json';
+import abi from '../contracts/counter-abi.json';
 
 const address = '0x90efcc9a055fe39c840ccf785e63f7b062363e5a14c51854d616e17c20b40d74';
 

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useBlock, useBlockNumber } from 'fuels-react';
 import * as Switch from '@radix-ui/react-switch';
+import { clsx } from 'clsx';
 import Card from '../components/Card';
 import type { CardProps } from '../components/Card';
-import { clsx } from 'clsx';
 
 function BlockSection() {
   const [autoRefetch, setAutoRefetch] = useState(false);

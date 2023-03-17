@@ -1,5 +1,5 @@
-import reactLogo from './assets/react.svg';
 import { useBlock, useWallet } from 'fuels-react';
+import reactLogo from './assets/react.svg';
 import './App.css';
 
 function App() {
