@@ -1,5 +1,11 @@
 # fuels-react
 
+## 0.3.7
+
+### Patch Changes
+
+- f2ced4d: remove 'loading' state
+
 ## 0.3.6
 
 ### Patch Changes
