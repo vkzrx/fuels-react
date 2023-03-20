@@ -1,0 +1,16 @@
+# See https://github.com/actions/labeler
+
+core:
+  - packages/core/**/*
+
+docs:
+  - docs/**/*
+
+playgrounds:
+  - playgrounds/**/*
+
+example:
+  - examples/**/*
+
+'🚨 action':
+  - .github/workflows/**

@@ -1,0 +1,52 @@
+name: '🪲 Bug Report'
+description: Report an issue or possible bug
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to file a bug report! Please fill out this form as completely as possible.
+  - type: input
+    id: astro-version
+    attributes:
+      label: What version of `fuels-react` are you using?
+      placeholder: 0.0.0
+    validations:
+      required: true
+  - type: input
+    id: package-manager
+    attributes:
+      label: What package manager are you using?
+      placeholder: npm, yarn, pnpm
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Describe the expect behavior
+      description: A clear and concise description of what the expected behavior should be.
+    validations:
+      required: true
+  - type: input
+    id: bug-reproduction
+    attributes:
+      label: Link to Minimal Reproducible Example
+      description: 'Providing a minimal reproduction can help others debug your issue.'
+      placeholder: 'https://stackblitz.com/abcd1234'
+    validations:
+      required: false
+  - type: checkboxes
+    id: will-pr
+    attributes:
+      label: Participation
+      options:
+        - label: I am willing to submit a pull request for this issue.
+          required: false
