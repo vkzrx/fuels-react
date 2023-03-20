@@ -39,11 +39,11 @@ export default defineConfig({
         items: [
           {
             text: 'Vite',
-            link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite',
+            link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/vite?file=src/main.tsx',
           },
           {
             text: 'Next',
-            link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/next',
+            link: 'https://stackblitz.com/fork/github/0xYami/fuels-react/tree/main/playgrounds/next?file=src/pages/_app.tsx',
           },
         ],
       },
