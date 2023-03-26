@@ -8,7 +8,7 @@ body:
       value: |
         Thank you for taking the time to file a bug report! Please fill out this form as completely as possible.
   - type: input
-    id: astro-version
+    id: version
     attributes:
       label: What version of `fuels-react` are you using?
       placeholder: 0.0.0
