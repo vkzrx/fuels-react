@@ -1,5 +1,8 @@
 # Fuel React library
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![CI](https://github.com/0xYami/fuels-react/actions/workflows/ci.yaml/badge.svg)
+
 This repository is at its early stage so things might not work as expected.
 
 A demo is available [https://fuels-react-vite.vercel.app](https://fuels-react-vite.vercel.app/)
@@ -55,3 +58,7 @@ function MyComponent() {
   ...
 }
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Feel free to use and modify it according to your needs.
