@@ -19,6 +19,7 @@ const chainToURL: Record<Chain['name'], string> = {
   'beta-1': 'https://node-beta-1.fuel.network/graphql',
   'beta-2': 'https://node-beta-2.fuel.network/graphql',
   'beta-3': 'https://beta-3.fuel.network/graphql',
+  'beta-4': 'https://beta-4.fuel.network/graphql',
   localhost: 'http://127.0.0.1:4000/graphql',
 };
 
@@ -30,7 +31,7 @@ class Client {
 
   // used to perform action where user wallet is not required
   // i.e. fetch blocks, transactions etc...
-  #defaultProvider: Provider;
+  #defaultProvider!: Provider;
 
   constructor({
     chains,
@@ -50,9 +51,10 @@ class Client {
 
     // chains is a NonEmptyArray
     const currentChain = this.chains[0];
-    this.#defaultProvider = new Provider(currentChain.url);
-
-    this.asyncInitialzeStore();
+    Provider.create(currentChain.url).then((provider) => {
+      this.#defaultProvider = provider;
+      this.asyncInitialzeStore();
+    });
   }
 
   isChainConfigured(name: Chain['name']): boolean {
@@ -69,8 +71,8 @@ class Client {
     return this.#defaultProvider;
   }
 
-  setDefaultProvider(chain: Chain): Provider {
-    this.#defaultProvider = new Provider(chain.url);
+  async setDefaultProvider(chain: Chain): Promise<Provider> {
+    this.#defaultProvider = await Provider.create(chain.url);
     return this.#defaultProvider;
   }
 
@@ -100,6 +102,7 @@ class Client {
       name: 'localhost',
       url: wallet.provider.url,
     };
+    if (chain.name === 'Testnet Beta 4') currentChain.name = 'beta-4';
     if (chain.name === 'Testnet Beta 3') currentChain.name = 'beta-3';
     if (chain.name === 'Testnet Beta 2') currentChain.name = 'beta-2';
     if (chain.name === 'Testnet Beta 1') currentChain.name = 'beta-1';

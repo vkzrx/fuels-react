@@ -3,7 +3,7 @@ import { proxy } from 'valtio';
 import { getClient } from './client';
 
 export type Chain = {
-  name: 'beta-1' | 'beta-2' | 'beta-3' | 'localhost';
+  name: 'beta-1' | 'beta-2' | 'beta-3' | 'beta-4' | 'localhost';
   url: string;
 };
 
