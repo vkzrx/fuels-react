@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Address, NativeAssetId } from 'fuels';
+import { Address, BaseAssetId } from 'fuels';
 import useChains from '../networks/useChains';
 import { useClient } from '../../context';
 import { AddressNotCorrect } from '../../errors';
@@ -20,7 +20,7 @@ function useBalance(config: UseBalanceConfig): BaseUseQueryResult<string> {
       const provider = client.getDefaultProvider();
       if (!config.address) throw new AddressNotCorrect();
       const address = Address.fromString(config.address);
-      const assetId = config.assetId || NativeAssetId;
+      const assetId = config.assetId || BaseAssetId;
       const balance = await provider.getBalance(address, assetId);
       return balance.toString();
     },
