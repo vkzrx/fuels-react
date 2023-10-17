@@ -5,6 +5,7 @@
 .pnpm-debug.log*
 .turbo
 .vscode
+yarn.lock
 cache
 coverage
 dist
